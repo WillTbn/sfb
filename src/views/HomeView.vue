@@ -1,5 +1,18 @@
 <template>
-  <HelloWorld />
+    <main-product>
+        <box  
+            v-for="item in products"
+            :key="item.id"
+
+            :name="item.name"
+            :id="item.id"
+            :image="item.image_one"
+            :description="item.description"
+            :type="item.type"
+            :value="item.value"
+        />
+    </main-product>
+    
 </template>
 
 <script>
@@ -7,12 +20,19 @@ import { defineComponent } from 'vue';
 
 // Components
 import HelloWorld from '../components/HelloWorld.vue';
-
+import MainProduct from '../components/MainProduct.vue'
+import Box from '../components/Product/Box.vue'
+import {mapState} from 'vuex'
 export default defineComponent({
-  name: 'HomeView',
-
-  components: {
-    HelloWorld,
-  },
+    name: 'HomeView',
+    computed:mapState(['products']),
+    components: {
+        HelloWorld,
+        MainProduct,
+        Box
+    },
+    created() {
+        this.$store.dispatch('getProducts')
+    },
 });
 </script>
