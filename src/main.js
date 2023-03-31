@@ -1,9 +1,9 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import router from './router'
-import store from './store'
-import vuetify from './plugins/vuetify'
-import { loadFonts } from './plugins/webfontloader'
+import router from './config/router'
+import store from './config/store'
+import vuetify from './config/plugins/vuetify'
+import { loadFonts } from './config/plugins/webfontloader'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { 
     faPhone, faCartShopping, faPlus, faTrash, faMinus

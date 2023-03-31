@@ -1,5 +1,5 @@
 <template>
-    <v-col cols="4">
+    <v-col cols="2">
         <v-hover v-slot="{ isHovering, props }">
             <v-card
                 v-bind="props"
@@ -9,7 +9,7 @@
             >
             <v-img
                 height="250"
-                :src="this.image"
+                :src="(this.image.includes('defatul')) ? this.urlImageDefault : this.urlImageStorage"
             ></v-img>
                 <v-card-title>{{name}}</v-card-title>
                 <v-card-text>
@@ -22,10 +22,10 @@
                         </div>
                     </v-row>
                     <div class="my-4 text-subtitle-1">
-                        R$ {{value}}
+                        R$ {{value.replace(".", ",")}}
                     </div>
 
-                    <div>{{description}}</div>
+                    
                 </v-card-text>
 
                 <v-divider class="mx-4"></v-divider>
@@ -43,10 +43,11 @@
                     > 
                         <font-awesome-icon :icon="['fass', 'cart-shopping']" />
                     </v-btn>
-                    <div class="" v-else>
+                    <div class="suave" v-else>
                         <v-card 
                         class="d-flex justify-space-between mb-6 align-center"
                         height="35"
+                        transition="slide-x-transition"
                         >
                             <div @click="toDecrease(1, this.value)" class="mx-auto">
                                 <font-awesome-icon color="red" :icon="['fass', 'fa-minus']" />
@@ -99,15 +100,17 @@
                                 </div>
                             </v-card>
                         </div>
+                        
                         <v-btn 
                             class="small clip"
-                            color="primary"
+                            color="green-darken-3"
                             small
                             @click="SentCartHome"
                             style="font-size:9px"
 
                         >
-                        Envia para carrinho {{this.cartValue}}</v-btn>
+                        Colocar carrinho R$ {{this.cartValue.toFixed(2).toString().replace(".", ",")}}</v-btn>
+                        <font-awesome-icon class="icon-right" :icon="['fass', 'cart-shopping']" />
                     </div>
                    
                 
@@ -117,17 +120,28 @@
     </v-col>
 </template>
 <style>
+.icon-right{
+    color:#1B5E20;
+    width: 10px;
+    position: absolute;
+    margin-left: -0.75rem;
+    margin-top: 1.4rem;
+}
 .clip{
     clip-path: polygon(
-        2rem 0,
+        0rem 0,
         calc(100% + 2rem) 0,
-        calc(100% + 2rem) 100%,
+        calc(65% + 2rem) 100%,
         -2rem 100%
     );
+}
+.suave{
+    transition: width 2s;
 }
 </style>
 <script>
 import AddCounter from './AddCounter.vue'
+import {url, baseStorage} from '@/config/global'
 export default {
     components:{AddCounter},
     props: {
@@ -138,7 +152,7 @@ export default {
         description: String,
         value: String,
     },
-     data(){
+    data(){
         return {
             contador:0, 
             six: 6,
@@ -146,7 +160,9 @@ export default {
             cart:true,
             cartQuantity:0,
             cartValue:0,
-            cartSent:{}
+            cartSent:{},
+            urlImageDefault: `${url}${this.image}`,
+            urlImageStorage: `${baseStorage}${this.image}`
         }
     },
     methods: {
