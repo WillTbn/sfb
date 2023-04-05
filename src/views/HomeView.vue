@@ -22,10 +22,13 @@ import { defineComponent } from 'vue';
 import HelloWorld from '../components/HelloWorld.vue';
 import MainProduct from '../components/MainProduct.vue'
 import Box from '../components/Product/Box.vue'
-import {mapState} from 'vuex'
+import {mapState,mapGetters} from 'vuex'
 export default defineComponent({
     name: 'HomeView',
-    computed:mapState(['products']),
+    computed:{
+        ...mapState(['viewBag', 'products']),
+        ...mapGetters(['EstadoCart'])
+    },
     components: {
         HelloWorld,
         MainProduct,

@@ -1,0 +1,16 @@
+.control-config>.v-overlay__content{
+    right: 0;
+    bottom: 0;
+    top:0;
+    margin: 0px;
+    width: 15rem;
+}
+.control-bag>.v-overlay__content{
+    left: 0;
+    bottom: 0;
+    top:0;
+    margin: 0px;
+    width: 25rem;
+    height: 100%;
+    background-color: #E6E6EA;
+}

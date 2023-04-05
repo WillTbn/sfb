@@ -1,11 +1,16 @@
 <template>
-    <v-col cols="2">
+    <v-col 
+        cols="12"
+        sm="6"
+        md="2"
+    >
         <v-hover v-slot="{ isHovering, props }">
             <v-card
                 v-bind="props"
                 :elevation="isHovering ? 24 : 6"
                 class="mx-auto my-12 rounded bg-grey-lighten-4"
                 max-width="260"
+                :class="{'select' : EstadoCart.find(e=>e.id == this.id)}"
             >
             <v-img
                 height="250"
@@ -37,13 +42,28 @@
                 
                 >
                     <v-btn
-                    class=" fab dark small"
-                    color="secondary"
-                    v-if="this.cart" @click="start"
+                        class=" fab dark small"
+                        color="red-darken-1"
+                        v-if="this.cart && !EstadoCart.find(e=>e.id == this.id)" @click="start"
                     > 
                         <font-awesome-icon :icon="['fass', 'cart-shopping']" />
                     </v-btn>
-                    <div class="suave" v-else>
+                    <v-btn 
+                            v-if="this.cart && EstadoCart.find(e=>e.id == this.id)"
+                            class="small clip"
+                            color="green-darken-3"
+                            small
+                            @click="start"
+                            style="font-size:9px"
+
+                        >
+                        Você já adicinou R$ {{this.cartValue.toFixed(2).toString().replace(".", ",")}}
+                    </v-btn>
+                        <font-awesome-icon 
+                         v-if="this.cart && EstadoCart.find(e=>e.id == this.id)"
+                        class="icon-right" :icon="['fass', 'check']" 
+                        />
+                    <div class="suave" v-if="!this.cart">
                         <v-card 
                         class="d-flex justify-space-between mb-6 align-center"
                         height="35"
@@ -56,10 +76,7 @@
                                 <p> {{this.cartQuantity}}</p>
                             </div>
                             <div @click="toAdd(1, this.value, this.name, this.id)" class="mx-auto">
-                                <font-awesome-icon 
-                                    color="green" 
-                                    :icon="['fass', 'fa-plus']" 
-                                />
+                                <font-awesome-icon color="green" :icon="['fass', 'fa-plus']"/>
                             </div>
                         </v-card>
                         <div class="d-flex justify-space-between mb-2 align-center">
@@ -107,9 +124,11 @@
                             small
                             @click="SentCartHome"
                             style="font-size:9px"
+                            v-if="this.cartQuantity > 0"
 
                         >
-                        Colocar carrinho R$ {{this.cartValue.toFixed(2).toString().replace(".", ",")}}</v-btn>
+                            Colocar carrinho R$ {{this.cartValue.toFixed(2).toString().replace(".", ",")}}
+                        </v-btn>
                         <font-awesome-icon class="icon-right" :icon="['fass', 'cart-shopping']" />
                     </div>
                    
@@ -138,12 +157,13 @@
 .suave{
     transition: width 2s;
 }
+.select{
+    border:solid #1B5E20;
+}
 </style>
 <script>
-import AddCounter from './AddCounter.vue'
 import Products from '../../config/mixins/Products'
 export default {
-    components:{AddCounter},
     props: {
         name: { type:String, required:true},
         id: { type:Number, required:true},
@@ -151,6 +171,8 @@ export default {
         type: String,
         description: String,
         value: String,
+        quantity:Number,
+        valorTotal:String
     },
    mixins:[Products]
 }
