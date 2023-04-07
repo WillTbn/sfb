@@ -1,4 +1,4 @@
-const viewModule =  {
+export default {
     state:{
         viewBag:false,
     },
@@ -11,4 +11,3 @@ const viewModule =  {
 
     }
 }
-export default viewModule

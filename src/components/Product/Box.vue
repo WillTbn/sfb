@@ -57,7 +57,7 @@
                             style="font-size:9px"
 
                         >
-                        Você já adicinou R$ {{this.cartValue.toFixed(2).toString().replace(".", ",")}}
+                        Você já adicinou {{ $filters.moneyFilter(this.cartValue)}}
                     </v-btn>
                         <font-awesome-icon 
                          v-if="this.cart && EstadoCart.find(e=>e.id == this.id)"
@@ -65,9 +65,9 @@
                         />
                     <div class="suave" v-if="!this.cart">
                         <v-card 
-                        class="d-flex justify-space-between mb-6 align-center"
-                        height="35"
-                        transition="slide-x-transition"
+                            class="d-flex justify-space-between mb-6 align-center"
+                            height="35"
+                            transition="slide-x-transition"
                         >
                             <div @click="toDecrease(1, this.value)" class="mx-auto">
                                 <font-awesome-icon color="red" :icon="['fass', 'fa-minus']" />
@@ -127,7 +127,7 @@
                             v-if="this.cartQuantity > 0"
 
                         >
-                            Colocar carrinho R$ {{this.cartValue.toFixed(2).toString().replace(".", ",")}}
+                            Colocar carrinho {{$filters.moneyFilter(this.cartValue)}}
                         </v-btn>
                         <font-awesome-icon class="icon-right" :icon="['fass', 'cart-shopping']" />
                     </div>
@@ -171,8 +171,7 @@ export default {
         type: String,
         description: String,
         value: String,
-        quantity:Number,
-        valorTotal:String
+        quantity:Number
     },
    mixins:[Products]
 }

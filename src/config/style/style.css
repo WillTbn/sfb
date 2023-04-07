@@ -14,3 +14,9 @@
     height: 100%;
     background-color: #E6E6EA;
 }
+.text-center-bag{
+    text-align-last: right;
+}
+.over{
+    overflow: hidden;
+}

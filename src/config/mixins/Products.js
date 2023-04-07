@@ -1,7 +1,10 @@
 import {url, baseStorage} from '@/config/global'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 export default {
-    computed:mapGetters(['EstadoCart']),
+    computed:{
+        ...mapGetters(['EstadoCart']),
+        ...mapMutations(['setCart','deleteProductCart'])
+    },
     data(){
         return {
             contador:0, 
@@ -22,17 +25,17 @@ export default {
         controlCart(quant, add, productValue){
             if(add){
                 this.cartValue = parseFloat((quant*productValue).toFixed(2))
-                console.log(this.controlCart.name, ' add if')
-                // console.log()
+              
+                
             }else{
-                console.log(this.controlCart.name, 'else')
+              
                 let toDecrease = productValue*quant
                 
                 this.cartValue =  parseFloat((this.cartValue-toDecrease).toFixed(2))
             }
         },
         toAdd(quantity, value){
-            console.log('aqui ->'+quantity)
+           
             if(this.cartQuantity == 0){
                 this.cartQuantity = this.contador+ quantity
             }
@@ -43,17 +46,17 @@ export default {
         },
         toDecrease(quantity, value){
             if(this.cartQuantity >= 1){
-                console.log('ESTOU AQUI if', this.cartQuantity)
+                
                 this.controlCart(quantity,false,value);
                 this.cartQuantity = this.cartQuantity-quantity
             }else if(this.cartQuantity <= 0 && this.EstadoCart.find(e=> e.id == this.id)){
-                console.log('ESTOU AQUI ELSEIF')
-                this.$store.commit('deleteProductCart', this.id)
+                
+                this.deleteProductCart(this.id)
                 this.cart = true
                 this.cartQuantity = 0
                 this.cartValue = 0
             }else{
-                console.log('ESTOU AQUI ELSE')
+                
                 this.cart = true
                 this.cartQuantity = 0
                 this.cartValue = 0
@@ -69,7 +72,7 @@ export default {
                 'image':this.image
             }
             this.cartSent = cartHome
-            
+            // this.setCart(cartHome)
             this.$store.commit('setCart', cartHome)
         },
         addSix(){

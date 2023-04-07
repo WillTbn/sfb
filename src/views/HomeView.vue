@@ -1,7 +1,7 @@
 <template>
     <main-product>
         <box  
-            v-for="item in products"
+            v-for="item in products.data"
             :key="item.id"
 
             :name="item.name"

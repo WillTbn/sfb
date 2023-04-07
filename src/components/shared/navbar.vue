@@ -3,8 +3,8 @@
         <v-toolbar-title @click="toggleMenuBag" >
             <font-awesome-icon :icon="['fas', 'bag-shopping']" />
             <v-badge
-            color="green"
-                :content="this.shoppingCart.length"
+                color="green"
+                :content="productTotal"
                 bordered
             ></v-badge>
         </v-toolbar-title>
@@ -48,12 +48,13 @@
     </v-app-bar>
 </template>
 <script>
-import Bag from '../Product/Bag.vue'
-import { mapState } from 'vuex'
+import { mapState,mapGetters } from 'vuex'
 
 export default {
-    computed:mapState(['user', 'shoppingCart']),
-    components:{Bag},
+    computed:{
+        ...mapState(['user', 'shoppingCart']),
+        ...mapGetters(['productTotal'])
+    },
     data() {
         return {
         items: [

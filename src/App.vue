@@ -1,7 +1,12 @@
 <template>
-    <v-app>
-        <div class="container-bag" v-if="this.viewBag">
-             <bag
+    <v-app :class="{'over' : this.view.viewBag}">
+        <div class="container-bag" v-if="this.view.viewBag" :class="{'over' : this.view.viewBag}">
+            <font-awesome-icon 
+                :icon="['fas', 'xmark']" @click="toggleMenuBag" 
+                style="right: 0;position: absolute; padding: 12px;"
+            />
+            <bag
+            
                 v-for="product in this.EstadoCart" :key="product.id"
                 :name="product.name"
                 :id="product.id"
@@ -10,8 +15,12 @@
                 :quantity="product.quantity"
                 :valueTotal="product.value"
             > </bag>
+            <bag-calculation
+                :total="valorTotal"
+                :quantity="productTotal"
+            ></bag-calculation>
         </div>
-        <div class="overlay-bag" @click="toggleMenuBag" v-if="this.viewBag"></div>
+        <div class="overlay-bag" @click="toggleMenuBag" v-if="this.view.viewBag"></div>
         <navbar></navbar>
         <v-main>
             <router-view/>
@@ -24,17 +33,18 @@
 import { mapState, mapGetters } from 'vuex'
 import navbar from './components/shared/navbar.vue'
 import Bag from './components/Product/Bag.vue'
+import BagCalculation from './components/Product/BagCalculation.vue'
 // import footer from './components/shared/footer.vue'
-
 export default {
     name: 'App',
     computed:{
-        ...mapState(['viewBag', 'shoppingCart']),
-        ...mapGetters(['EstadoCart'])
+        ...mapState(['view', 'shoppingCart']),
+        ...mapGetters(['EstadoCart', 'valorTotal', 'productTotal'])
     },
     components: {
        navbar,
-       Bag
+       Bag,
+       BagCalculation
     //    footer
     },
     data: () => ({
@@ -52,7 +62,7 @@ export default {
     width: 500px;
     height: 100%;
     position:absolute;
-    background-color:blue;
+    background-color:#E6E6EA;
     z-index: 2000;
 }
 .overlay-bag{
