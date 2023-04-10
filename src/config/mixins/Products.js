@@ -1,8 +1,8 @@
 import {url, baseStorage} from '@/config/global'
-import { mapGetters, mapMutations } from 'vuex'
+import {  mapMutations, mapState } from 'vuex'
 export default {
     computed:{
-        ...mapGetters(['EstadoCart']),
+        ...mapState(['shopping']),
         ...mapMutations(['setCart','deleteProductCart'])
     },
     data(){
@@ -49,9 +49,8 @@ export default {
                 
                 this.controlCart(quantity,false,value);
                 this.cartQuantity = this.cartQuantity-quantity
-            }else if(this.cartQuantity <= 0 && this.EstadoCart.find(e=> e.id == this.id)){
-                
-                this.deleteProductCart(this.id)
+            }else if(this.cartQuantity <= 0 && this.shopping.cart.find(e=> e.id == this.id)){
+                this.$store.commit('deleteProductCart', this.id)
                 this.cart = true
                 this.cartQuantity = 0
                 this.cartValue = 0
@@ -63,7 +62,7 @@ export default {
             }            
         },
         SentCartHome(){
-            const cartHome = {
+            let cartHome ={
                 'name': this.name,
                 'price': this.value,
                 'quantity':this.cartQuantity,
@@ -71,9 +70,11 @@ export default {
                 'id': this.id,
                 'image':this.image
             }
+            console.log(cartHome)
             this.cartSent = cartHome
             // this.setCart(cartHome)
-            this.$store.commit('setCart', cartHome)
+            this.$store.dispatch('setState', cartHome)
+            // this.$store.commit('setCart', cartHome)
         },
         addSix(){
             this.contador+this.six
@@ -82,13 +83,20 @@ export default {
             this.contador+this.eleven
         },
         getProduct(){
-            if(this.EstadoCart.length > 0) {
-                let product = this.EstadoCart.find(e=> e.id == this.id)
+            if(this.shopping.cart.length > 1) {
+                let product = this.shopping.cart.find(e=> e.id == this.id)
                 if(product){
                     this.cartQuantity = product.quantity
                     this.cartValue = product.value
                 }
             }
+        },
+        selectItem(item){
+            // console.log('aqui ->>>', this.shopping)
+            if(this.shopping.cart.length > 1){
+                return this.shopping.cart.find(e=>e.id == item) ? true : false
+            }
+            return false
         }
     },
     mounted() {

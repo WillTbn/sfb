@@ -5,11 +5,18 @@
     </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
 import Return from '../components/shared/return.vue'
 export default {
     name:'CheckoutView',
+    computed:mapGetters(['view']),
     components:{
       Return
+    },
+    methods:{
+    },
+    created(){
+       this.$store.commit('setViewBag', false)
     }
 }
 </script>

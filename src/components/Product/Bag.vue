@@ -1,13 +1,13 @@
 <template>
     <v-card
-        class="mx-auto bag pt-5 mt-2 d-flex"
+        class="ml-auto mr-2 bag pt-5 mt-2 d-flex"
         max-width="366"
         max-height="100"
     >
         <div class="d-flex" height="100" >
             <div class="mx-auto">
                 <img
-                    :src="(this.image.includes('defatul')) ? this.urlImageDefault : this.urlImageStorage"
+                    :src="(this.image.includes('default')) ? this.urlImageDefault : this.urlImageStorage"
                     :alt="this.name"
                     width="40"
                     height="60"

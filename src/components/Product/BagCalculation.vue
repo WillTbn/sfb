@@ -28,7 +28,7 @@
             
         </div>
         <div class="d-flex text-center">
-            <v-btn color="red" style="margin: 2rem;">
+            <v-btn color="red" style="margin: 2rem;" >
                 <router-link  class="btn-checkout" to="/checkout">Finalizar compra</router-link>
             </v-btn>
         </div>
@@ -54,6 +54,7 @@ export default {
 
 .bag-calculation{
     margin: 2rem;
+    margin-top:5rem;
 }
 
 </style>

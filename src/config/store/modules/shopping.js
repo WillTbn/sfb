@@ -1,6 +1,6 @@
 export default {
     state: {
-        cart:localStorage.length <= 0 ? [] : JSON.parse( localStorage.getItem('cart') ),
+        cart:!localStorage.getItem('cart') ? [] : JSON.parse(localStorage.getItem('cart')),
         
     },
     getters: {
@@ -16,8 +16,9 @@ export default {
         productTotal(state){
             let total = 0;
             if(state.cart.length > 0){
-                for (let i = 0; i < state.cart.length; i++) {
+                for (let i = 0; i <  state.cart.length; i++) {
                     total += state.cart[i].quantity;
+                    console.log('Estou no for')
                 }
             }
             return total
@@ -27,33 +28,47 @@ export default {
         }
     },
     mutations: {
+        setCart(state, payload){
+            state.cart = [payload]
+            localStorage.setItem('cart', JSON.stringify(state.cart))
+        },
+        setPlus(state, payload){
+            let productIndex = state.cart.indexOf(state.cart.find(element => element.id == payload.id))
+            state.cart[productIndex].quantity = payload.quantity
+            state.cart[productIndex].value =  payload.value
+            // localStorage.setItem('cart', JSON.stringify(state.cart))
+        },
+        setPushCart(state, payload){
+            // console.log('PAYLOAD', payload)
+            state.cart.push(payload)
+        },
         setProducts(state, products){
             state.products = products
-        },
-        setCart(state, purchase){
-
-            if(state.cart.length <= 0 ){
-                let item = { ...purchase}
-                state.cart.push(item)
-            }else if(state.cart.some(id => id.id == purchase.id)) {
-                let productIndex = state.cart.indexOf(state.cart.find(element => element.id == purchase.id))
-                state.cart[productIndex].quantity = purchase.quantity
-                state.cart[productIndex].value =  purchase.value                
-            }else{
-                state.cart.push(purchase)
-            }
-            localStorage.setItem('cart', [JSON.stringify(state.cart)])
-            
         },
         deleteProductCart(state, id){
             let item = state.cart.indexOf(state.cart.find(element => element.id == id))
             state.cart.splice(item, 1)
-            localStorage.setItem('cart', [JSON.stringify(state.cart)])
+            // localStorage.setItem('cart', JSON.stringify(state.cart))
 
-        }
+        },
+        
     },
     actions: {
-        
+        setState(context, item){
+            if( Object.values(context.state.cart)[0] == null){
+               
+                console.log('Estou no setState if', context.state.cart)
+                context.commit('setCart', item)
+                
+            }else if(context.state.cart.some(e => e.id == item.id)) {
+                console.log('Estou no setState if ELSE', context.state.cart)
+               context.commit('setPlus', item)                        
+            }else{
+                console.log('Estou no setState ELSE', context.state.cart)
+                context.commit('setPushCart', item) 
+            }
+            localStorage.setItem('cart', JSON.stringify(context.state.cart))
+        },
         setLocalStorage(context, item){
             context.commit('setCart', item)
         },

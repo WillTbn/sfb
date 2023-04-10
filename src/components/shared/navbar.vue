@@ -1,25 +1,40 @@
 <template>
-    <v-app-bar app color="grey-darken-4" dark>
-        <v-toolbar-title @click="toggleMenuBag" >
-            <font-awesome-icon :icon="['fas', 'bag-shopping']" />
+    <v-app-bar app color="grey-darken-4" class="d-flex justify-space-between" dark>
+        
+        <div class="mx-auto">
             <v-badge
-                color="green"
+                class="pa-2 cursor-p"
                 :content="productTotal"
+                color="red"
+                avatar
                 bordered
-            ></v-badge>
-        </v-toolbar-title>
-        <!--Logo-->
-        <v-spacer >
-                <img
-                src="@/assets/logo-sfb.png"
-                size="26"
-                height="45"
+                overlap
+                bottom
+                style="color:red"
+                @click="toggleMenuBag"
             >
-        </v-spacer>
+                <v-toolbar-title  >
+                        <font-awesome-icon class="pa-2" :icon="['fas', 'bag-shopping']" />
+                </v-toolbar-title>
+            </v-badge>
+
+        </div>
+        <!--Logo-->
+        <div class=" mx-auto">
+            
+            <v-spacer  class="mx-auto cursor-p">
+                <img
+                    src="@/assets/logo-sfb.png"
+                    size="26"
+                    height="45"
+                >
+            </v-spacer>
+        </div>
         <!--Options-->
-        <v-avatar v-on:click="toggleMenu" v-if="this.user.token">
+        <v-avatar v-on:click="toggleMenuConfig" v-if="this.user.token" class="cursor-p mx-auto">
+            <font-awesome-icon :icon="['fas', 'bars']"  color="pink" class="fa-bars"/>
             <img
-                :src="this.user.avatar"
+                :src="$filters.baseUrlPublic(this.user.account.avatar)"
                 :alt="this.user.name"
                 size="56"
                 width="30"
@@ -30,6 +45,7 @@
             <a >Login</a>
         </div>
         
+        
         <!--Configurações do usuarios-->
         <v-menu 
             v-model="config" 
@@ -37,9 +53,22 @@
             bottom
             class="control-config"
             transition="slide-x-reverse-transition"
-            
+            width="20rem"
         >
             <v-list>
+                <div class="flex-row justify-center text-center">
+                    <v-avatar class=" mx-auto">
+                        <img
+                            :src="$filters.baseUrlPublic(this.user.account.avatar)"
+                            :alt="this.user.name"
+                            width="30"
+                            height="30"
+                        >
+                    </v-avatar>
+                    <p> <b>{{this.user.account.user.name}}</b></p>
+                    <p class="text-caption text--secondary">{{this.user.account.user.email}}</p>
+                    <p class="config-click cursor-p"  @click="toggleDialog"> Altera dados </p>
+                </div>
                 <v-list-item v-for="item in items" :key="item.title" :to="item.href" link>
                     <v-list-item-title>{{ item.title }}</v-list-item-title>
                 </v-list-item>
@@ -52,7 +81,7 @@ import { mapState,mapGetters } from 'vuex'
 
 export default {
     computed:{
-        ...mapState(['user', 'shoppingCart']),
+        ...mapState(['user', 'shopping', 'view']),
         ...mapGetters(['productTotal'])
     },
     data() {
@@ -67,12 +96,16 @@ export default {
         }
     },
     methods: {
-        toggleMenu() {
+        toggleMenuConfig() {
             this.config = !this.config
+            this.$store.commit('setViewConfig', true)
         },
         toggleMenuBag() {
             this.bag = true
             this.$store.commit('setViewBag', this.bag)
+        },
+        toggleDialog(){
+            this.$store.dispatch('setUserConfig', true)
         }
     }
 }
@@ -88,4 +121,14 @@ export default {
     bottom: 0px;
 }
 
+.fa-bars{
+        position: absolute;
+    margin-right: 16px;
+    margin-top: 1.2rem;
+}
+.config-click{
+    color:#F44336;
+    cursor: pointer;
+
+}
 </style>

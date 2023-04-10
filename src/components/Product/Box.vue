@@ -10,11 +10,11 @@
                 :elevation="isHovering ? 24 : 6"
                 class="mx-auto my-12 rounded bg-grey-lighten-4"
                 max-width="260"
-                :class="{'select' : EstadoCart.find(e=>e.id == this.id)}"
+                :class="{'select' : this.selectItem(this.id)}"
             >
             <v-img
                 height="250"
-                :src="(this.image.includes('defatul')) ? this.urlImageDefault : this.urlImageStorage"
+                :src="(this.image.includes('default')) ? this.urlImageDefault : this.urlImageStorage"
             ></v-img>
                 <v-card-title>{{name}}</v-card-title>
                 <v-card-text>
@@ -27,7 +27,7 @@
                         </div>
                     </v-row>
                     <div class="my-4 text-subtitle-1">
-                        R$ {{value.replace(".", ",")}}
+                        {{$filters.moneyFilter(value)}}
                     </div>
 
                     
@@ -44,12 +44,12 @@
                     <v-btn
                         class=" fab dark small"
                         color="red-darken-1"
-                        v-if="this.cart && !EstadoCart.find(e=>e.id == this.id)" @click="start"
+                        v-if="this.cart && !this.selectItem(this.id)" @click="start"
                     > 
                         <font-awesome-icon :icon="['fass', 'cart-shopping']" />
                     </v-btn>
                     <v-btn 
-                            v-if="this.cart && EstadoCart.find(e=>e.id == this.id)"
+                            v-if="this.cart && this.selectItem(this.id)"
                             class="small clip"
                             color="green-darken-3"
                             small
@@ -60,7 +60,7 @@
                         Você já adicinou {{ $filters.moneyFilter(this.cartValue)}}
                     </v-btn>
                         <font-awesome-icon 
-                         v-if="this.cart && EstadoCart.find(e=>e.id == this.id)"
+                         v-if="this.cart && this.selectItem(this.id)"
                         class="icon-right" :icon="['fass', 'check']" 
                         />
                     <div class="suave" v-if="!this.cart">
