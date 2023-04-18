@@ -23,17 +23,19 @@
                 <v-container>
                     <avatar></avatar>
                     <v-row class="d-flex justify-center">
+                        <!--
                         <v-col cols="6">
-                            <!-- Aqui vai o avatar!!! -->
-                        </v-col>
-                    </v-row>
-                    <v-row>
-                        <v-col
+                                 Aqui vai o avatar!!! 
+                                </v-col>
+                            </v-row>
+                            <v-row>
+                    -->
+                    <v-col
                             cols="12"
                         >
                             <v-text-field
-                                v-model="this.user.account.user.name"
-                                label="first name*"
+                                v-model="this.user.name"
+                                label="Nome e sobrenome*"
                                 required
                                 :rules="nameRules"
                             ></v-text-field>
@@ -45,16 +47,15 @@
                             sm="6"
                             class="pa-4"
                         >
-                        <label for="birthay" class="">Data de Nascimento</label>
-                        <input 
-                            class="border rounded" 
-                            type="date" 
-                            name="birthday"
-                            :value="this.user.account.birthday" 
-                            id="birthday"
-                            :rules="birthdayRules"
-                        >
-                        
+                            <label for="birthay" class="">Data de Nascimento*</label>
+                            <input 
+                                class="border rounded" 
+                                type="date" 
+                                name="birthday"
+                                :value="this.account.birthday" 
+                                id="birthday"
+                                :rules="birthdayRules"
+                            >
                         </v-col>
                         <v-col
                             class="d-flex"
@@ -63,88 +64,105 @@
                         >
                             <v-select
                                 :items="genre"
-                                label="sexo"
+                                label="sexo*"
                                 dense
                                 solo
-                                v-model="$filters.genreSelect(this.user.account.genre)[0]"
+                               
+                                v-model="$filters.genreSelect(this.account.genre)[0]"
                             ></v-select>
                         </v-col>
+                        <v-col cols="6">
+                            <v-text-field
+                                v-model="this.account.phone"
+                                label="Celular ou Telefone secundario"
+                                required
+                            ></v-text-field>
+                        </v-col>
                         <v-checkbox
-                            :value="$filters.notificationsSelect(this.user.account.notifications)[0]"
+                            :value="$filters.notificationsSelect(this.account.notifications)[0]"
                             label="Aceitar receber notificações"
                             color="indigo darken-3"
                             v-model="checkbox"
                             hide-details
                         ></v-checkbox>
                     </v-row>
+                    
                     <!-- DISABLED -->
-                    <v-row>
-                        <!-- <disable-form
-                            :condominioName="this.user.account.condominia.name"
-                            :apartmentNumber="this.user.account.apartment.number"
-                            :apartmentBlock="this.user.account.apartment.block"
-                            :userEmail="this.user.account.user.email"
-                            :accountPerson="this.user.account.person"
-                        ></disable-form> -->
-                        <v-col cols="6" sm="12" md="6">
-                            <v-text-field
-                                v-model="this.user.account.condominia.name"
-                                label="Condominio"
-                                disabled
-                            ></v-text-field>
-                        </v-col>
-                        <v-col cols="3">
-                            <v-text-field
-                                v-model="this.user.account.apartment.number"
-                                label="Nº apartamento"
-                                disabled
-                            ></v-text-field>
-                        </v-col>
-                        <v-col cols="3">
-                            <v-text-field
-                                v-model="this.user.account.apartment.block"
-                                label="Bloco"
-                                disabled
-                            ></v-text-field>
-                        </v-col>
-                        <v-col cols="6" sm="12" md="6">
-                            <v-text-field
-                                v-model="this.user.account.user.email"
-                                label="Email"
-                                disabled
-                            ></v-text-field>
-                        </v-col>
-                        <v-col cols="6" sm="12" md="6">
-                            <v-text-field
-                                v-model="this.user.account.person"
-                                label="CPF"
-                                disabled
-                            ></v-text-field>
-                        </v-col> 
-                    </v-row>
+                        <v-row>
+                            <!-- <disable-form
+                                :condominioName="this.account.condominia.name"
+                                :apartmentNumber="this.account.apartment.number"
+                                :apartmentBlock="this.account.apartment.block"
+                                :userEmail="this.account.user.email"
+                                :accountPerson="this.account.person"
+                            ></disable-form> -->
+                            <v-col cols="6" sm="12" md="6">
+                                <v-text-field
+                                    v-model="this.account.condominia.name"
+                                    label="Condominio"
+                                    disabled
+                                ></v-text-field>
+                            </v-col>
+                            <v-col cols="3">
+                                <v-text-field
+                                    v-model="this.account.apartment.number"
+                                    label="Nº apartamento"
+                                    disabled
+                                ></v-text-field>
+                            </v-col>
+                            <v-col cols="3">
+                                <v-text-field
+                                    v-model="this.account.apartment.block"
+                                    label="Bloco"
+                                    disabled
+                                ></v-text-field>
+                            </v-col>
+                            <v-col cols="6">
+                                <v-text-field
+                                    v-model="this.account.phone"
+                                    label="Telefone principal"
+                                    required
+                                    disabled
+                                    value="1111111111"
+                                ></v-text-field>
+                            </v-col>
+                            <v-col cols="6" sm="12" md="6">
+                                <v-text-field
+                                    v-model="this.account.user.email"
+                                    label="Email"
+                                    disabled
+                                ></v-text-field>
+                            </v-col>
+                            <v-col cols="6" sm="12" md="6">
+                                <v-text-field
+                                    v-model="this.account.person"
+                                    label="CPF"
+                                    disabled
+                                ></v-text-field>
+                            </v-col> 
+                        </v-row>
                     <!-- DISABLED -->
-
 
                 </v-container>
                 <small>*Indica os campos obrigatórios</small>
             </v-card-text>
 
             <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn
-                color="blue darken-1"
-                text
-                @click="toggleMenuBag(false)"
-            >
-                Close
-            </v-btn>
-            <v-btn
-                color="blue darken-1"
-                text
-                @click="toggleMenuBag(false)"
-            >
-                Save
-            </v-btn>
+                <v-spacer></v-spacer>
+                <v-btn
+                    color="blue darken-1"
+                    text
+                    @click="toggleMenuBag(false)"
+                >
+                    Close
+                </v-btn>
+                <v-btn
+                    color="blue darken-1"
+                    text
+                    @click="save()"
+                >
+                    Save
+                </v-btn>
             </v-card-actions>
         </v-card>
         </v-dialog>
@@ -153,6 +171,7 @@
 <script>
 import { mapState } from 'vuex'
 import Avatar from './Avatarvue.vue'
+// import {ValidationProvider} from 'vee-validate'
 // import DisableForm from './DisabledForm.vue'
 
 export default {
@@ -167,7 +186,7 @@ export default {
     },
     data(){
         return {
-            // checkbox:this.user.account.notifications == "A" ? true : false,
+            // checkbox:this.account.notifications == "A" ? true : false,
             checkbox:this.terms == "A" ? true : false,
             genre:[
                 "Feminino",
@@ -182,7 +201,7 @@ export default {
                 value => (value && value.length <= 100) || 'O nome dever ter no maximo 100 caracteres'
             ],
             birthdayRules:[
-                value => this.verificarIdade(value) || 'Idade tem que ser maior que 18 anos.'
+                value => this.verificarIdade(value) <= 18  || 'Idade tem que ser maior que 18 anos.'
             ]
         }
     },
@@ -194,7 +213,13 @@ export default {
             let milisegundos = Date.now() - data.getTime();
             let anos = Math.floor(milisegundos / 31556952000)
             console.log('anos -> ',anos)
-            return anos >= 18 ? true : false
+            return anos 
+        },
+        save(){
+            const dataSend = {
+                'name' : this.account.name
+            }
+            console.log('Data send', dataSend)
         }
     }
     

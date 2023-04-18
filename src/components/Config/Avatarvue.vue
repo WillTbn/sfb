@@ -4,7 +4,7 @@
             <div class="d-flex">
                 <div class="mt-3">
                     
-                    <img  v-if="state" :src="$filters.baseUrlPublic(this.user.account.avatar)" alt="" srcset="" class="rounded" width="100" height="100">
+                    <img  v-if="state" :src="$filters.baseUrlPublic(this.account.avatar)" alt="" srcset="" class="rounded" width="100" height="100">
                     <img v-else :src="imagePreview" alt="" srcset="" class="rounded" width="100" height="100">
                     <input type="file" class="d-none" 
                             id="image" 

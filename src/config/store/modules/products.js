@@ -1,12 +1,16 @@
 import axios from 'axios'
 export default {
     state: {
-        data:[],        
+        data:[],
+        loading:true
     },
     mutations: {
         setProducts(state, products){
             state.data = products
         },
+        setLoading(state, payload){
+            state.loading = payload
+        }
     },
     actions: {
         getProducts(context){
@@ -16,7 +20,7 @@ export default {
                     context.commit('setProducts', json.data.response.produtos)
                     console.log(json)
                 }
-            }).catch(error=>console.log(error))
+            }).catch(error=>console.log(error)).finally(context.commit('setLoading', false))
 
         }
     },

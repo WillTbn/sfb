@@ -6,21 +6,38 @@ export default {
     getters: {
         valorTotal(state) {
             let total = 0;
-            if(state.cart.length > 0){
-                for (let i = 0; i < state.cart.length; i++) {
-                    total += state.cart[i].value;
+            let pro = Object.values(state.cart)
+            if(pro.length > 0){
+                for (let i = 0; i < pro.length; i++) {
+                    total += pro[i].value;
                 }
             }
-            return total.toFixed(2).toString().replace(".", ",")
+           
+            return parseFloat(total).toFixed(2).toString().replace(".", ",")
         },
         productTotal(state){
             let total = 0;
-            if(state.cart.length > 0){
-                for (let i = 0; i <  state.cart.length; i++) {
-                    total += state.cart[i].quantity;
-                    console.log('Estou no for')
+            
+            let pro = Object.values(state.cart)[0]
+            let pegar = new Proxy(pro, {
+                get(target, prop){
+                    console.log(`Acessando propriedade: ${prop}` )
+                    return target[prop]
+                }
+            })
+            const item = pegar[0]
+            console.log(item)
+            console.log('PRO ', typeof pro)
+            console.log('promise', pro)
+            // Object.values(context.state.cart)[0]
+            if(pro.length > 0){
+                for (let i = 0; i <  pro.length; i++) {
+                    total += pro[i].quantity;
+                    console.log("count product's cart")
                 }
             }
+            console.log('TIPO ', typeof total)
+            console.log('TOTAL ', total)
             return total
         },
         EstadoCart(state){

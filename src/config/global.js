@@ -1,6 +1,7 @@
 
 export const url = "http://localhost:8087/"
 export const baseStorage = "http://localhost:8087/storage/"
+export const localId = "__sfb_"
 
 
-export default {url, baseStorage}
+export default {localId, url, baseStorage}

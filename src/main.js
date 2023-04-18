@@ -13,7 +13,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import 'vuetify/dist/vuetify-labs'
 import '@/config/style/style.css'
-import {url} from './config/global'
+import {baseStorage} from './config/global'
 
 loadFonts()
 library.add([
@@ -39,7 +39,7 @@ apps.config.globalProperties.$filters = {
         return `R$ ${parseFloat(value).toFixed(2)}`.replace('.', ',')
     },
     baseUrlPublic(value){
-        return `${url}${value}`
+        return `${baseStorage}${value}`
     },
     genreSelect(value){
         let genre = ["Feminino","Masculino","Outro","Não Informa"]

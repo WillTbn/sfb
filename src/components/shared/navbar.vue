@@ -31,18 +31,24 @@
             </v-spacer>
         </div>
         <!--Options-->
-        <v-avatar v-on:click="toggleMenuConfig" v-if="this.user.token" class="cursor-p mx-auto">
+        <v-avatar 
+            v-on:click="toggleMenuConfig" 
+            v-if="this.user.user" 
+            class="cursor-p mx-auto"
+        >
             <font-awesome-icon :icon="['fas', 'bars']"  color="pink" class="fa-bars"/>
             <img
-                :src="$filters.baseUrlPublic(this.user.account.avatar)"
-                :alt="this.user.name"
+                :src="$filters.baseUrlPublic(this.avatar)"
+                :alt="this.name"
                 size="56"
                 width="30"
                 height="30"
             >
         </v-avatar>
-        <div class="no-auth" v-else > 
-            <a >Login</a>
+        <div class="no-auth mx-auto" v-else > 
+            <router-link to="/Login" class="auth-link">
+                Login
+            </router-link>
         </div>
         
         
@@ -59,14 +65,14 @@
                 <div class="flex-row justify-center text-center">
                     <v-avatar class=" mx-auto">
                         <img
-                            :src="$filters.baseUrlPublic(this.user.account.avatar)"
+                            :src="$filters.baseUrlPublic(this.avatar)"
                             :alt="this.user.name"
                             width="30"
                             height="30"
                         >
                     </v-avatar>
-                    <p> <b>{{this.user.account.user.name}}</b></p>
-                    <p class="text-caption text--secondary">{{this.user.account.user.email}}</p>
+                    <p> <b>{{this.name}}</b></p>
+                    <p class="text-caption text--secondary">{{this.email}}</p>
                     <p class="config-click cursor-p"  @click="toggleDialog"> Altera dados </p>
                 </div>
                 <v-list-item v-for="item in items" :key="item.title" :to="item.href" link>
@@ -84,12 +90,18 @@ export default {
         ...mapState(['user', 'shopping', 'view']),
         ...mapGetters(['productTotal'])
     },
+    props:{
+        avatar:{type: String},
+        email:{type: String},
+        name:{type: String},
+
+    },
     data() {
         return {
-        items: [
-            { title: 'Home', href: '/' },
-            { title: 'About', href: '/about' },
-        ],
+            items: [
+                { title: 'Home', href: '/' },
+                { title: 'About', href: '/about' },
+            ],
             config: false,
             bag:false,
             group: null,
@@ -114,6 +126,13 @@ export default {
 .no-auth{
     padding: 10px;
     margin-right: 10px;
+}
+.auth-link{
+    cursor: pointer;
+    text-decoration: none;
+    color: #F44336;
+    font-size: larger;
+    font-weight: bolder;
 }
 .control-config{
     right: 0px;
