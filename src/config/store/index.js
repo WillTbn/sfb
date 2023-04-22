@@ -7,6 +7,7 @@ import user from './modules/user';
 
 export default createStore({
     state: {
+        teste:false
         /*
         user:{
             "name":"Jorge Nunes",

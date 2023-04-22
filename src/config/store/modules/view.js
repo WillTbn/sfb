@@ -1,4 +1,5 @@
 export default {
+    namespaced: true,
     state:{
         viewBag:false,
         userconfig:false,

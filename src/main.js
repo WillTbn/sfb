@@ -8,7 +8,8 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import axios from 'axios'
 import { 
     faPhone, faCartShopping, faPlus, faTrash, faMinus, faBagShopping,
-    faCheck, faXmark, faArrowLeft, faBars
+    faCheck, faXmark, faArrowLeft, faBars, faBeerMugEmpty,
+    faBeer, faBottleWater
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import 'vuetify/dist/vuetify-labs'
@@ -19,7 +20,8 @@ loadFonts()
 library.add([
     faPhone, faCartShopping, faPlus, 
     faTrash, faMinus, faBagShopping,faCheck,
-    faXmark, faArrowLeft, faBars
+    faXmark, faArrowLeft, faBars, faBeerMugEmpty,
+    faBeer,faBottleWater
 ])
 const DEFAULT_TITLE = 'Smart Fast Buy'
 router.beforeEach((to, from, next) => {

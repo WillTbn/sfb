@@ -8,6 +8,7 @@ export default {
         }
     },
     computed:{
+        ...mapState('view', ['loading', 'login']),
         ...mapState(['view', 'shopping', 'user']),
         ...mapGetters(['valorTotal', 'productTotal'])
     },
@@ -18,8 +19,10 @@ export default {
             const token = JSON.parse(json)
 
             if(!token){
-                console.log('ESTOU VERIFICANDO TOKEN LOCALMENTE')
+                console.log('ESTOU VERIFICANDO TOKEN LOCALMENTE', this.loading)
+                console.log(2+2)
                 this.validated = false
+                this.$store.commit('view/setLoading', false)
                 this.$router.push({name: 'Login'})
                 return
             }
@@ -32,7 +35,7 @@ export default {
                 let loggedUser = resToken.data.response.user
                 this.$store.commit('setUser', loggedUser)
                 this.$store.dispatch('getDataAccount')
-                this.$store.commit('setLoading', false)
+                this.$store.commit('view/setLoading', false)
                 this.validated = true
                 this.$router.push({ name: 'Home'})
             }else{

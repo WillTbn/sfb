@@ -1,8 +1,8 @@
 <template>
     <v-app >
-        <loading  v-if="this.view.loading" />
+        <loading  v-if="this.loading" />
         <auth 
-            v-if="!this.view.login && !this.user"
+            v-if="!this.loading || (!this.login && !this.user)"
         />
         <contents v-else/>
     </v-app>

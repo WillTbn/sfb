@@ -24,7 +24,7 @@
             
             <v-spacer  class="mx-auto cursor-p">
                 <img
-                    src="@/assets/logo-sfb.png"
+                    src="@/assets/img/logo-sfb.png"
                     size="26"
                     height="45"
                 >

@@ -82,3 +82,18 @@
 .cursor-p{
     cursor: pointer;
 }
+.vrow-login{
+    background: url('../../assets/img/smartfastbuy.png') no-repeat right top #f5eceba8;
+    background-blend-mode:difference;
+    background-size:contain;
+}
+.logo-sfb{
+    width: 100%;
+    height: 10rem;
+    background: url('../../assets/img/logo-sfb-dark.png') no-repeat  top ;
+}
+@media (max-width: 991px){
+    .vrow-login{
+        background: none;
+    }
+}
