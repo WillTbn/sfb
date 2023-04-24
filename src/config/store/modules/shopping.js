@@ -1,4 +1,5 @@
 export default {
+    namespaced: true,
     state: {
         cart:!localStorage.getItem('cart') ? [] : JSON.parse(localStorage.getItem('cart')),
         
@@ -6,27 +7,22 @@ export default {
     getters: {
         valorTotal(state) {
             let total = 0;
-            let pro = Object.values(state.cart)
+            let pro = state.cart
             if(pro.length > 0){
                 for (let i = 0; i < pro.length; i++) {
                     total += pro[i].value;
                 }
             }
-           
-            return parseFloat(total).toFixed(2).toString().replace(".", ",")
+            let formatNumber = parseFloat(total).toFixed(2).toString().replace(".", ",")
+
+            console.log('Valor Total -> ', formatNumber)
+            return formatNumber
         },
         productTotal(state){
             let total = 0;
             
-            let pro = Object.values(state.cart)[0]
-            let pegar = new Proxy(pro, {
-                get(target, prop){
-                    console.log(`Acessando propriedade: ${prop}` )
-                    return target[prop]
-                }
-            })
-            const item = pegar[0]
-            console.log(item)
+            let pro = state.cart
+            
             console.log('PRO ', typeof pro)
             console.log('promise', pro)
             // Object.values(context.state.cart)[0]
@@ -39,9 +35,6 @@ export default {
             console.log('TIPO ', typeof total)
             console.log('TOTAL ', total)
             return total
-        },
-        EstadoCart(state){
-            return state.cart
         }
     },
     mutations: {

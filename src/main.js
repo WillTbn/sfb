@@ -13,7 +13,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import 'vuetify/dist/vuetify-labs'
-import '@/config/style/style.css'
+import './config/css/style.css'
 import {baseStorage} from './config/global'
 
 loadFonts()
@@ -23,6 +23,14 @@ library.add([
     faXmark, faArrowLeft, faBars, faBeerMugEmpty,
     faBeer,faBottleWater
 ])
+
+
+axios.defaults.headers.common['accept'] = 'application/json'
+axios.defaults.baseURL = 'http://localhost:8087/api/'
+
+
+const apps = createApp(App)
+apps.config.productionTip = false
 const DEFAULT_TITLE = 'Smart Fast Buy'
 router.beforeEach((to, from, next) => {
     console.log(to.name, from.name)
@@ -30,11 +38,6 @@ router.beforeEach((to, from, next) => {
     document.title = to.name != undefined ? `${DEFAULT_TITLE} -  ${to.name}` : DEFAULT_TITLE
     next()
 })
-
-
-
-const apps = createApp(App)
-
 
 apps.config.globalProperties.$filters = { 
     moneyFilter(value){
@@ -51,9 +54,6 @@ apps.config.globalProperties.$filters = {
         return value == "A" ? true : false
     }
 }
-
-axios.defaults.headers.common['accept'] = 'application/json'
-axios.defaults.baseURL = 'http://localhost:8087/api/'
 
 apps
   .component("font-awesome-icon", FontAwesomeIcon)

@@ -79,6 +79,7 @@ import { localId } from '@/config/global'
 import LoadingInput from '@/components/shared/LoadingInput.vue'
 export default {
     components:{LoadingInput},
+    name:'AuthVue',
     data () {
         return {
             valid: true,

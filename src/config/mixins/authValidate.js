@@ -1,7 +1,8 @@
+import { defineComponent } from 'vue';
 import axios from "axios"
 import { localId } from "../global"
 import { mapState, mapGetters } from 'vuex'
-export default {
+export default defineComponent({
     data(){
         return {
             validated:false
@@ -9,7 +10,8 @@ export default {
     },
     computed:{
         ...mapState('view', ['loading', 'login']),
-        ...mapState(['view', 'shopping', 'user']),
+        ...mapState('user', ['account', 'user']),
+        ...mapState(['view', 'shopping']),
         ...mapGetters(['valorTotal', 'productTotal'])
     },
     methods: {
@@ -30,11 +32,11 @@ export default {
             const resToken = await axios.post('/auth/validateToken', token)
             if(resToken.data.response.user){
                 console.log('UUUUUHHH RETORNOU ALGO > API')
-                this.$store.dispatch('setLogin', true)
+                this.$store.commit('view/setViewLogin', true)
                 console.log('restoken ',resToken)
                 let loggedUser = resToken.data.response.user
-                this.$store.commit('setUser', loggedUser)
-                this.$store.dispatch('getDataAccount')
+                this.$store.commit('user/setUser', loggedUser )
+                this.$store.dispatch('user/getDataAccount')
                 this.$store.commit('view/setLoading', false)
                 this.validated = true
                 this.$router.push({ name: 'Home'})
@@ -46,5 +48,5 @@ export default {
     },
     created() {
         this.validateToken()
-    },
-}
+    }
+});

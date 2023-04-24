@@ -8,7 +8,7 @@
 </template>
 <script>
 export default {
-    name:'Return',
+    name:'return',
     props:['name']
 }
 </script>

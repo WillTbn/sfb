@@ -1,7 +1,7 @@
 <template>
     <v-row justify="center">
         <v-dialog
-            v-model="this.view.userconfig"
+            v-model="this.userconfig"
             persistent
             max-width="600px"
         >
@@ -21,7 +21,7 @@
             </v-card-title>
             <v-card-text>
                 <v-container>
-                    <avatar></avatar>
+                    <avatar-user/>
                     <v-row class="d-flex justify-center">
                         <!--
                         <v-col cols="6">
@@ -128,7 +128,7 @@
                             </v-col>
                             <v-col cols="6" sm="12" md="6">
                                 <v-text-field
-                                    v-model="this.account.user.email"
+                                    v-model="this.user.email"
                                     label="Email"
                                     disabled
                                 ></v-text-field>
@@ -169,19 +169,20 @@
     </v-row>
 </template>
 <script>
-import { mapState } from 'vuex'
-import Avatar from './Avatarvue.vue'
-// import {ValidationProvider} from 'vee-validate'
-// import DisableForm from './DisabledForm.vue'
 
+import { mapState } from 'vuex'
+import AvatarUser from './AvatarUser.vue'
 export default {
     name:'UserData',
-    computed:{...mapState(['view', 'user'])},
+    computed:{
+        ...mapState('view',['userconfig']),
+        ...mapState('user',['user', 'account'])
+    },
     props: {
         terms: {type:String},
     },
     components:{
-        Avatar, 
+        AvatarUser, 
         // DisableForm
     },
     data(){

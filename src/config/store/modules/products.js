@@ -1,7 +1,8 @@
 import axios from 'axios'
 export default {
+    namespaced: true,
     state: {
-        data:[],
+        data:'',
         loading:true
     },
     mutations: {

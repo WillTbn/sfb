@@ -2,8 +2,7 @@ import {url, baseStorage} from '@/config/global'
 import {  mapMutations, mapState } from 'vuex'
 export default {
     computed:{
-        ...mapState(['shopping']),
-        ...mapMutations(['setCart','deleteProductCart'])
+        ...mapState('shopping',['cart'])
     },
     data(){
         return {
@@ -49,8 +48,8 @@ export default {
                 
                 this.controlCart(quantity,false,value);
                 this.cartQuantity = this.cartQuantity-quantity
-            }else if(this.cartQuantity <= 0 && this.shopping.cart.find(e=> e.id == this.id)){
-                this.$store.commit('deleteProductCart', this.id)
+            }else if(this.cartQuantity <= 0 && this.cart.find(e=> e.id == this.id)){
+                this.$store.commit('shopping/deleteProductCart', this.id)
                 this.cart = true
                 this.cartQuantity = 0
                 this.cartValue = 0
@@ -73,7 +72,7 @@ export default {
             console.log(cartHome)
             this.cartSent = cartHome
             // this.setCart(cartHome)
-            this.$store.dispatch('setState', cartHome)
+            this.$store.dispatch('shopping/setState', cartHome)
             // this.$store.commit('setCart', cartHome)
         },
         addSix(){
@@ -83,8 +82,8 @@ export default {
             this.contador+this.eleven
         },
         getProduct(){
-            if(this.shopping.cart.length > 1) {
-                let product = this.shopping.cart.find(e=> e.id == this.id)
+            if(this.cart.length > 1) {
+                let product = this.cart.find(e=> e.id == this.id)
                 if(product){
                     this.cartQuantity = product.quantity
                     this.cartValue = product.value
@@ -92,9 +91,9 @@ export default {
             }
         },
         selectItem(item){
-            // console.log('aqui ->>>', this.shopping)
-            if(this.shopping.cart.length > 1){
-                return this.shopping.cart.find(e=>e.id == item) ? true : false
+            // console.log('aqui ->>>', this)
+            if(this.cart.length > 1){
+                return this.cart.find(e=>e.id == item) ? true : false
             }
             return false
         }

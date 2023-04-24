@@ -38,7 +38,7 @@
 <script>
 import { mapState } from 'vuex'
 export default {
-    name:'Avatarvue',
+    name:'AvatarUser',
     computed:mapState(['user']),
     data() {
         return {

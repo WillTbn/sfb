@@ -1,13 +1,14 @@
 import axios from "axios"
 import {localId} from "../../global"
 export default {
+    namespaced: true,
     state:{
         user:null,
         account:null
     },
     mutations:{
-        setAccount(state, account){
-            state.account = account
+        setAccount(state, payload){
+            state.account = payload
         },
         // setToken(state, payload){
         //     state.token = payload

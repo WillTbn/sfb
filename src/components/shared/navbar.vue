@@ -33,7 +33,7 @@
         <!--Options-->
         <v-avatar 
             v-on:click="toggleMenuConfig" 
-            v-if="this.user.user" 
+            v-if="this.user" 
             class="cursor-p mx-auto"
         >
             <font-awesome-icon :icon="['fas', 'bars']"  color="pink" class="fa-bars"/>
@@ -86,9 +86,10 @@
 import { mapState,mapGetters } from 'vuex'
 
 export default {
+    name:'navbar',
     computed:{
-        ...mapState(['user', 'shopping', 'view']),
-        ...mapGetters(['productTotal'])
+        ...mapState('user',['user', 'account']),
+        ...mapGetters('shopping', ['productTotal'])
     },
     props:{
         avatar:{type: String},
@@ -110,14 +111,14 @@ export default {
     methods: {
         toggleMenuConfig() {
             this.config = !this.config
-            this.$store.commit('setViewConfig', true)
+            this.$store.commit('view/setViewConfig', true)
         },
         toggleMenuBag() {
             this.bag = true
-            this.$store.commit('setViewBag', this.bag)
+            this.$store.commit('view/setViewBag', this.bag)
         },
         toggleDialog(){
-            this.$store.dispatch('setUserConfig', true)
+            this.$store.dispatch('view/setUserConfig', true)
         }
     }
 }

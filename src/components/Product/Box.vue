@@ -164,6 +164,7 @@
 <script>
 import Products from '../../config/mixins/Products'
 export default {
+    name:'Box',
     props: {
         name: { type:String, required:true},
         id: { type:Number, required:true},

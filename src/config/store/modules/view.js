@@ -4,15 +4,15 @@ export default {
         viewBag:false,
         userconfig:false,
         viewConfig:false,
-        login: null,
+        login: false,
         loading:true
     },
     mutations:{
-        setViewBag(state, viewBag){
-            state.viewBag = viewBag
+        setViewBag(state, payload){
+            state.viewBag = payload
         },
-        userConfig(state, userconfig){
-            state.userconfig = userconfig
+        userConfig(state, payload){
+            state.userconfig = payload
         },
         setViewConfig(state, payload){
             state.viewConfig = payload

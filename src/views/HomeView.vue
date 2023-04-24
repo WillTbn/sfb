@@ -1,5 +1,6 @@
 <template>
-    <v-container style="height: 400px; " v-if="this.products.loading">
+    <div class="home-view">
+    <v-container style="height: 400px; " v-if="this.loading">
         <v-row
             class="fill-height"
             align-content="center"
@@ -23,7 +24,7 @@
     </v-container>
     <main-product v-else>
         <box  
-            v-for="item in products.data"
+            v-for="item in this.data"
             :key="item.id"
 
             :name="item.name"
@@ -34,30 +35,29 @@
             :value="item.value"
         />
     </main-product>
-    
+    </div>
 </template>
 
 <script>
 import { defineComponent } from 'vue';
 
 // Components
-import HelloWorld from '../components/HelloWorld.vue';
 import MainProduct from '../components/MainProduct.vue'
 import Box from '../components/Product/Box.vue'
-import {mapState,mapGetters} from 'vuex'
+import {mapState} from 'vuex'
 export default defineComponent({
     name: 'HomeView',
     computed:{
-        ...mapState(['viewBag', 'products']),
-        ...mapGetters(['EstadoCart'])
+        ...mapState('view',['viewBag']),
+        ...mapState('products',['data', 'loading'])
     },
     components: {
-        HelloWorld,
+       
         MainProduct,
         Box
     },
     created() {
-        this.$store.dispatch('getProducts')
+        this.$store.dispatch('products/getProducts')
     },
 });
 </script>

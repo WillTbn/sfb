@@ -2,7 +2,7 @@
     <v-app >
         <loading  v-if="this.loading" />
         <auth 
-            v-if="!this.loading || (!this.login && !this.user)"
+            v-if="!this.loading  && !this.login && !this.user"
         />
         <contents v-else/>
     </v-app>
@@ -14,7 +14,6 @@ import authValidate from './config/mixins/authValidate'
 import Loading from './components/shared/Loading.vue'
 import Contents from './views/Contents.vue'
 import Auth from './views/Auth.vue'
-import { mapState } from 'vuex'
 
 // import footer from './components/shared/footer.vue'
 export default {

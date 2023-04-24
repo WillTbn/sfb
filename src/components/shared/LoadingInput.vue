@@ -18,7 +18,7 @@
 </template>
 <script>
 export default {
-    name:'Loading'
+    name:'LoadingInput'
 }
 </script>
 <style>
