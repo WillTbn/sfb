@@ -5,89 +5,89 @@
             persistent
             max-width="600px"
         >
-        <template v-slot:activator="{ on, attrs }">
-            <v-btn
-                color="primary"
-                dark
-                v-bind="attrs"
-                v-on="on"
-            >
-                Open Dialog
-            </v-btn>
-        </template>
-        <v-card>
-            <v-card-title>
-                <span class="text-h5">Dados pessoais</span>
-            </v-card-title>
-            <v-card-text>
-                <v-container>
-                    <avatar-user/>
-                    <v-row class="d-flex justify-center">
-                        <!--
-                        <v-col cols="6">
-                                 Aqui vai o avatar!!! 
-                                </v-col>
-                            </v-row>
-                            <v-row>
-                    -->
-                    <v-col
-                            cols="12"
-                        >
-                            <v-text-field
-                                v-model="this.user.name"
-                                label="Nome e sobrenome*"
-                                required
-                                :rules="nameRules"
-                            ></v-text-field>
-                        </v-col>
-                        <!-- Alteraveis -->
-
-                        <v-col
-                            cols="6"
-                            sm="6"
-                            class="pa-4"
-                        >
-                            <label for="birthay" class="">Data de Nascimento*</label>
-                            <input 
-                                class="border rounded" 
-                                type="date" 
-                                name="birthday"
-                                :value="this.account.birthday" 
-                                id="birthday"
-                                :rules="birthdayRules"
+            <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                    color="primary"
+                    dark
+                    v-bind="attrs"
+                    v-on="on"
+                >
+                    Open Dialog
+                </v-btn>
+            </template>
+            <v-card>
+                <v-card-title>
+                    <span class="text-h5">Dados pessoais</span>
+                </v-card-title>
+                <v-card-text>
+                    <v-container>
+                        <avatar-user/>
+                        <v-row class="d-flex justify-center">
+                            <!--
+                            <v-col cols="6">
+                                    Aqui vai o avatar!!! 
+                                    </v-col>
+                                </v-row>
+                                <v-row>
+                            -->
+                            <v-col
+                                cols="12"
                             >
-                        </v-col>
-                        <v-col
-                            class="d-flex"
-                            cols="12"
-                            sm="6"
-                        >
-                            <v-select
-                                :items="genre"
-                                label="sexo*"
-                                dense
-                                solo
-                               
-                                v-model="$filters.genreSelect(this.account.genre)[0]"
-                            ></v-select>
-                        </v-col>
-                        <v-col cols="6">
-                            <v-text-field
-                                v-model="this.account.phone"
-                                label="Celular ou Telefone secundario"
-                                required
-                            ></v-text-field>
-                        </v-col>
-                        <v-checkbox
-                            :value="$filters.notificationsSelect(this.account.notifications)[0]"
-                            label="Aceitar receber notificações"
-                            color="indigo darken-3"
-                            v-model="checkbox"
-                            hide-details
-                        ></v-checkbox>
-                    </v-row>
-                    
-                    <!-- DISABLED -->
+                                <v-text-field
+                                    v-model="this.user.name"
+                                    label="Nome e sobrenome*"
+                                    required
+                                    :rules="nameRules"
+                                ></v-text-field>
+                            </v-col>
+                            <!-- Alteraveis -->
+
+                            <v-col
+                                cols="6"
+                                sm="6"
+                                class="pa-4"
+                            >
+                                <label for="birthay" class="">Data de Nascimento*</label>
+                                <input 
+                                    class="border rounded" 
+                                    type="date" 
+                                    name="birthday"
+                                    :value="this.account.birthday" 
+                                    id="birthday"
+                                    :rules="birthdayRules"
+                                >
+                            </v-col>
+                            <v-col
+                                class="d-flex"
+                                cols="12"
+                                sm="6"
+                            >
+                                <v-select
+                                    :items="genre"
+                                    label="sexo*"
+                                    dense
+                                    solo
+                                
+                                    v-model="$filters.genreSelect(this.account.genre)[0]"
+                                ></v-select>
+                            </v-col>
+                            <v-col cols="6">
+                                <v-text-field
+                                    v-model="this.account.phone"
+                                    label="Celular ou Telefone secundario"
+                                    required
+                                ></v-text-field>
+                            </v-col>
+                            <v-checkbox
+                                :value="$filters.notificationsSelect(this.account.notifications)[0]"
+                                label="Aceitar receber notificações"
+                                color="indigo darken-3"
+                                v-model="checkbox"
+                                hide-details
+                            ></v-checkbox>
+                        </v-row>
+                        
+                        <!-- DISABLED -->
                         <v-row>
                             <!-- <disable-form
                                 :condominioName="this.account.condominia.name"
@@ -141,30 +141,30 @@
                                 ></v-text-field>
                             </v-col> 
                         </v-row>
-                    <!-- DISABLED -->
+                        <!-- DISABLED -->
 
-                </v-container>
-                <small>*Indica os campos obrigatórios</small>
-            </v-card-text>
+                    </v-container>
+                    <small>*Indica os campos obrigatórios</small>
+                </v-card-text>
 
-            <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn
-                    color="blue darken-1"
-                    text
-                    @click="toggleMenuBag(false)"
-                >
-                    Close
-                </v-btn>
-                <v-btn
-                    color="blue darken-1"
-                    text
-                    @click="save()"
-                >
-                    Save
-                </v-btn>
-            </v-card-actions>
-        </v-card>
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                        color="blue darken-1"
+                        text
+                        @click="toggleMenuBag(false)"
+                    >
+                        Close
+                    </v-btn>
+                    <v-btn
+                        color="blue darken-1"
+                        text
+                        @click="save()"
+                    >
+                        Save
+                    </v-btn>
+                </v-card-actions>
+            </v-card>
         </v-dialog>
     </v-row>
 </template>

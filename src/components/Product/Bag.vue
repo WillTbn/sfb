@@ -47,6 +47,7 @@
 
 <script>
 import {url, baseStorage} from '@/config/global'
+import productMix from '@/config/mixins/productMix'
 
 export default {
     
@@ -60,11 +61,12 @@ export default {
     },
     data(){
         return {
-             urlImageDefault: `${url}${this.image}`,
+            urlImageDefault: `${url}${this.image}`,
             urlImageStorage: `${baseStorage}${this.image}`,
         }
     },
-    name:'Bag'
+    name:'Bag',
+    mixins:[productMix]
 }
 </script>
 <style>

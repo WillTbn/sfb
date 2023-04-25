@@ -39,7 +39,7 @@
 import { mapState } from 'vuex'
 export default {
     name:'AvatarUser',
-    computed:mapState(['user']),
+    computed:mapState('user'['account']),
     data() {
         return {
             inputName:false,

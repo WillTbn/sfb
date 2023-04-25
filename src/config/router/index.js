@@ -5,20 +5,23 @@ import CheckoutView from '../../views/CheckoutView.vue'
 
 const routes = [
     {
-        path: '/',
-        name: 'Home',
-        component: HomeView
-    },
-    {
         path: '/login',
         name: 'Login',
-        component: Auth
+        component: Auth,
+        meta: { transition: 'slide-right' },
+    },
+    {
+        path: '/',
+        name: 'Home',
+        component: HomeView,
+        meta: { transition: 'slide-right' },
     },
 
     {
         path: '/checkout',
         name: 'Checkout',
-        component: CheckoutView
+        component: CheckoutView,
+        meta: { transition: 'slide-left' },
     },
     {
         path: '/about',

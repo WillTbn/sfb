@@ -10,12 +10,14 @@
                 :elevation="isHovering ? 24 : 6"
                 class="mx-auto my-12 rounded bg-grey-lighten-4"
                 max-width="260"
-                :class="{'select' : this.selectItem(this.id)}"
+                :class="{'select' : this.sectionCart}"
             >
-            <v-img
-                height="250"
-                :src="(this.image.includes('default')) ? this.urlImageDefault : this.urlImageStorage"
-            ></v-img>
+            <!-- Parte fixa -->
+                <v-img
+                    height="250"
+                    :src="(this.image.includes('default')) ? this.urlImageDefault : this.urlImageStorage"
+                ></v-img>
+            
                 <v-card-title>{{name}}</v-card-title>
                 <v-card-text>
                     <v-row
@@ -34,22 +36,25 @@
                 </v-card-text>
 
                 <v-divider class="mx-4"></v-divider>
-                
+            
+            <!-- Parte fixa -->   
                 <div 
                 class="contador 
                     text-center mx-auto pa-4
                     rounded secondary bordered-purple"
                 
                 >
+                    <!-- carrinho -->
                     <v-btn
                         class=" fab dark small"
                         color="red-darken-1"
-                        v-if="this.cart && !this.selectItem(this.id)" @click="start"
+                        v-if="this.addItem && !this.sectionCart" @click="start"
                     > 
                         <font-awesome-icon :icon="['fass', 'cart-shopping']" />
                     </v-btn>
+                    <!-- carrinho -->
                     <v-btn 
-                            v-if="this.cart && this.selectItem(this.id)"
+                            v-if="!this.addItem && this.sectionCart"
                             class="small clip"
                             color="green-darken-3"
                             small
@@ -59,11 +64,11 @@
                         >
                         Você já adicinou {{ $filters.moneyFilter(this.cartValue)}}
                     </v-btn>
-                        <font-awesome-icon 
-                         v-if="this.cart && this.selectItem(this.id)"
-                        class="icon-right" :icon="['fass', 'check']" 
-                        />
-                    <div class="suave" v-if="!this.cart">
+                    <font-awesome-icon 
+                        v-if="!this.addItem && this.sectionCart"
+                    class="icon-right" :icon="['fass', 'check']" 
+                    />
+                    <div class="suave" v-if="this.addItem && this.sectionCart">
                         <v-card 
                             class="d-flex justify-space-between mb-6 align-center"
                             height="35"
@@ -127,7 +132,7 @@
                             v-if="this.cartQuantity > 0"
 
                         >
-                            Colocar carrinho {{$filters.moneyFilter(this.cartValue)}}
+                            Colocar no carrinho {{$filters.moneyFilter(this.cartValue)}}
                         </v-btn>
                         <font-awesome-icon class="icon-right" :icon="['fass', 'cart-shopping']" />
                     </div>
@@ -162,7 +167,8 @@
 }
 </style>
 <script>
-import Products from '../../config/mixins/Products'
+import { computed } from 'vue'
+import productMix from '../../config/mixins/productMix'
 export default {
     name:'Box',
     props: {
@@ -174,6 +180,6 @@ export default {
         value: String,
         quantity:Number
     },
-   mixins:[Products]
+    mixins:[productMix]
 }
 </script>

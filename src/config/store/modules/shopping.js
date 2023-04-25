@@ -1,7 +1,8 @@
+import {localId} from "../../global"
 export default {
     namespaced: true,
     state: {
-        cart:!localStorage.getItem('cart') ? [] : JSON.parse(localStorage.getItem('cart')),
+        cart:!localStorage.getItem(`${localId}cart`) ? [] : JSON.parse(localStorage.getItem(`${localId}cart`)),
         
     },
     getters: {
@@ -40,7 +41,8 @@ export default {
     mutations: {
         setCart(state, payload){
             state.cart = [payload]
-            localStorage.setItem('cart', JSON.stringify(state.cart))
+            console.log('state', state.cart)
+            localStorage.setItem( `${localId}cart`, JSON.stringify(state.cart))
         },
         setPlus(state, payload){
             let productIndex = state.cart.indexOf(state.cart.find(element => element.id == payload.id))

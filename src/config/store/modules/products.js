@@ -21,7 +21,9 @@ export default {
                     context.commit('setProducts', json.data.response.produtos)
                     console.log(json)
                 }
-            }).catch(error=>console.log(error)).finally(context.commit('setLoading', false))
+            })
+            .catch(error=>console.log(error))
+            .finally(context.commit('setLoading', false))
 
         }
     },

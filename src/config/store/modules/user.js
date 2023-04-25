@@ -4,7 +4,7 @@ export default {
     namespaced: true,
     state:{
         user:null,
-        account:null
+        account:!localStorage.getItem(`${localId}account`) ? [] : JSON.parse(localStorage.getItem(`${localId}account`)),
     },
     mutations:{
         setAccount(state, payload){
@@ -20,10 +20,11 @@ export default {
     },
     actions:{
         getDataAccount(context){
-            if(!localStorage.getItem(localId+'account')){
+            if(context.state.account.length <= 0){
+                console.log('ESTOU NO AQUI')
                 axios.get('account/'+context.state.user.id).then(json => {
                     context.commit('setAccount', json.data.response.account)
-                    localStorage.setItem('user', [JSON.stringify( json.data.response.account)])
+                    localStorage.setItem(localId+'account', [JSON.stringify( json.data.response.account)])
                 }).catch(e=>console.log(e))
             }else{
                 console.log('ESTOU NO ELSEIF EXISTE')
@@ -38,6 +39,13 @@ export default {
 
                 localStorage.setItem(localId+'token', JSON.stringify(json.data.response.authorization.token))
             }).catch(e=>console.log(e))
+        },
+        logout(context){
+            localStorage.removeItem(`${localId}account`)
+            localStorage.removeItem(`${localId}token`)
+            context.commit('setUser', null)
+            document.location.replace(document.location.origin)
+            
         }
     }
 

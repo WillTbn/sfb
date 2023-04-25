@@ -33,9 +33,12 @@ const apps = createApp(App)
 apps.config.productionTip = false
 const DEFAULT_TITLE = 'Smart Fast Buy'
 router.beforeEach((to, from, next) => {
-    console.log(to.name, from.name)
+    console.log(' to ->', to.name, ' from ->',from.name)
     router.hasRoute(from.name)
     document.title = to.name != undefined ? `${DEFAULT_TITLE} -  ${to.name}` : DEFAULT_TITLE
+    if(from.name == 'Login'){
+        document.location.replace(document.location.origin)
+    }
     next()
 })
 

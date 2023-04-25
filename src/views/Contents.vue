@@ -1,6 +1,7 @@
 <template>
     <v-container fluid 
-        class="container-login">
+        class="container-login"
+    >
         <user-data
             :terms="this.account.notifications"
             v-if="this.userconfig"
@@ -38,7 +39,7 @@
         />
         <div class="overlay-bag" @click="toggleMenuBag" v-if="this.viewBag"></div>
         
-            <router-view/>
+        <router-view/>
         
     </v-container>
 </template>

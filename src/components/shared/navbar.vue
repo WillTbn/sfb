@@ -78,7 +78,14 @@
                 <v-list-item v-for="item in items" :key="item.title" :to="item.href" link>
                     <v-list-item-title>{{ item.title }}</v-list-item-title>
                 </v-list-item>
+                <div class="pa-2 logout">
+                    <v-btn @click="putLogout">
+                    Sair
+                    </v-btn>
+                </div>
             </v-list>
+        
+        
         </v-menu>
     </v-app-bar>
 </template>
@@ -119,6 +126,10 @@ export default {
         },
         toggleDialog(){
             this.$store.dispatch('view/setUserConfig', true)
+        },
+        putLogout(){
+            this.$store.dispatch('user/logout') 
+            //console.log('Redirect -> ',this.$router.hasRoute())
         }
     }
 }
@@ -150,5 +161,10 @@ export default {
     color:#F44336;
     cursor: pointer;
 
+}
+.logout{
+    position: absolute;
+    bottom: 0px;
+    color: red;
 }
 </style>
