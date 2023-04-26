@@ -121,7 +121,7 @@ export default {
                 this.text = ''
                 axios.post('/auth/login', user)
                 .then(json=>{
-                    this.$store.commit('setUser', json.data.response.user)
+                    this.$store.commit('user/setUser', json.data.response.user)
                     // context.commit('setToken', json.data.authorisation.token)
                     console.log(json)
                     

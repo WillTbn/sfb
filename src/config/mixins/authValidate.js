@@ -1,7 +1,7 @@
 import { defineComponent } from 'vue';
 import axios from "axios"
 import { localId } from "../global"
-import { mapState, mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 export default defineComponent({
     data(){
         return {
@@ -10,9 +10,8 @@ export default defineComponent({
     },
     computed:{
         ...mapState('view', ['loading', 'login']),
-        ...mapState('user', ['account', 'user']),
-        ...mapState(['view', 'shopping']),
-        ...mapGetters(['valorTotal', 'productTotal'])
+        ...mapState('user', ['account', 'user', 'auth']),
+        ...mapState(['view', 'shopping'])
     },
     methods: {
         async validateToken(){
@@ -24,7 +23,7 @@ export default defineComponent({
                 console.log('ESTOU VERIFICANDO TOKEN LOCALMENTE', this.loading)
                 this.validated = false
                 this.$store.commit('view/setLoading', false)
-                this.$router.push({name: 'Login'})
+                // this.$router.push({name: 'Login'})
                 return
             }
             axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
@@ -39,6 +38,7 @@ export default defineComponent({
                 this.$store.commit('user/setUser', loggedUser )
                 this.$store.dispatch('user/getDataAccount')
                 this.$store.commit('view/setLoading', false)
+                this.$store.commit('user/setAuth', true)
                 this.validated = true
                 // document.location.replace(document.location.origin)
                 

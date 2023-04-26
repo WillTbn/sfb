@@ -1,13 +1,4 @@
 <template>
-    <!-- <div class="loading mt-5 pt-5">
-        <v-progress-circular
-            :size="70"
-            :width="7"
-            color="purple"
-            indeterminate
-        ></v-progress-circular>
-    </div> 
--->
     <div class="loading d-flex align-center justify-center">
         <div class="circle"> 
             <font-awesome-icon color="red" :icon="['fas', 'beer']" />
@@ -22,7 +13,6 @@
         <div class="circle">
             <font-awesome-icon color="red" :icon="['fas', 'cart-shopping']" />
         </div>
-        
     </div>
 </template>
 <script>
@@ -31,11 +21,6 @@ export default {
 }
 </script>
 <style>
-    /* .loading{
-        display:flex;
-        justify-content: center;
-        align-items: center;
-    } */
 .loading {
     animation: spin988 2s linear infinite;
     

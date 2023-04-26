@@ -1,6 +1,6 @@
 <template>
     <v-app-bar app color="grey-darken-4" class="d-flex justify-space-between" dark>
-        
+
         <div class="mx-auto">
             <v-badge
                 class="pa-2 cursor-p"
@@ -31,23 +31,23 @@
             </v-spacer>
         </div>
         <!--Options-->
-        <v-avatar 
+        <div class="cursor-p mx-auto"
+            v-if="this.status" 
             v-on:click="toggleMenuConfig" 
-            v-if="this.user" 
-            class="cursor-p mx-auto"
         >
             <font-awesome-icon :icon="['fas', 'bars']"  color="pink" class="fa-bars"/>
-            <img
-                :src="$filters.baseUrlPublic(this.avatar)"
-                :alt="this.name"
-                size="56"
-                width="30"
-                height="30"
+            <v-avatar 
+               
+                class="cursor-p mx-auto"
+                :image="$filters.baseUrlPublic(this.avatar)"
+                size="36"
             >
-        </v-avatar>
+            </v-avatar>
+
+        </div>
         <div class="no-auth mx-auto" v-else > 
-            <router-link to="/Login" class="auth-link">
-                Login
+            <router-link to="/Login" class="auth-link" @click="setLogin">
+                Login {{ this.status }}
             </router-link>
         </div>
         
@@ -102,6 +102,7 @@ export default {
         avatar:{type: String},
         email:{type: String},
         name:{type: String},
+        status:{type:Boolean}
 
     },
     data() {
@@ -130,7 +131,13 @@ export default {
         putLogout(){
             this.$store.dispatch('user/logout') 
             //console.log('Redirect -> ',this.$router.hasRoute())
+        },
+        setLogin(){
+            this.$store.commit('user/setAuth', true)
         }
+    },
+    created(){
+        console.log('NavBar -> ', this.user.length)
     }
 }
 </script>
@@ -153,9 +160,10 @@ export default {
 }
 
 .fa-bars{
-        position: absolute;
+    position: absolute;
     margin-right: 16px;
     margin-top: 1.2rem;
+    z-index: 9;
 }
 .config-click{
     color:#F44336;

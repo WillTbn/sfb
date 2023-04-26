@@ -1,29 +1,46 @@
 <template>
     <v-app >
         <loading  v-if="this.loading" />
-        <auth 
+        <!-- <auth 
             v-if="!this.loading  && !this.login && !this.user"
+        /> -->
+        <auth 
+            v-if="!this.loading && this.statusView == 'notAuth'"
         />
-        <contents v-else/>
+        <!-- Verificar se esta auth false || se ele um tipo cliente  -->
+        <contents-client 
+            v-if="!this.loading && this.statusView == 'authClient'"
+        />
+        <contents-adm 
+            v-if="!this.loading && this.statusView == 'auth'"
+        />
     </v-app>
 </template>
 
 <script>
-
-import authValidate from './config/mixins/authValidate'
-import Loading from './components/shared/Loading.vue'
-import Contents from './views/Contents.vue'
+import {mapGetters} from 'vuex'
 import Auth from './views/Auth.vue'
+import Loading from './components/shared/Loading.vue'
+
+import ContentsAdm from './views/Dashboard/Contents.vue'
+import ContentsClient from './views/Clients/Contents.vue'
+import authValidate from './config/mixins/authValidate'
 
 // import footer from './components/shared/footer.vue'
 export default {
     name: 'App',
+    computed:{...mapGetters('user', ['statusView'])},
     data(){
         return{
             loadingPag: true
         }
     },
-    components: {Loading,Contents,Auth},
+    components: {
+        Auth,
+        Loading,
+        ContentsAdm,
+        ContentsClient, 
+    },
     mixins:[authValidate]
 }
 </script>

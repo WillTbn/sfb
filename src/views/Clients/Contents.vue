@@ -32,11 +32,13 @@
             ></bag-calculation>
         </div>
         <navbar
-            v-if="this.login"
+            v-if="this.auth"
             :name="this.user.name"
             :avatar="this.account.avatar"
             :email="this.user.email"
+            :status="this.auth"
         />
+        <navbar v-if="!this.login"/>
         <div class="overlay-bag" @click="toggleMenuBag" v-if="this.viewBag"></div>
         
         <router-view/>
@@ -57,7 +59,7 @@ export default defineComponent({
     name:'Contents',
     computed:{
         ...mapState('view',['userconfig', 'viewBag', 'login', 'viewConfig']),
-        ...mapState('user',['account', 'user']),
+        ...mapState('user',['account', 'user', 'auth']),
         ...mapState('shopping',['cart']),
         ...mapGetters('shopping', ['valorTotal', 'productTotal'])
     },
