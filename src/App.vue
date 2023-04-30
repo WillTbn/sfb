@@ -1,17 +1,17 @@
 <template>
     <v-app >
         <loading  v-if="this.loading" />
-        <!-- <auth 
+        <!-- <auth
             v-if="!this.loading  && !this.login && !this.user"
         /> -->
-        <auth 
+        <auth
             v-if="!this.loading && this.statusView == 'notAuth'"
         />
         <!-- Verificar se esta auth false || se ele um tipo cliente  -->
-        <contents-client 
+        <contents-client
             v-if="!this.loading && this.statusView == 'authClient'"
         />
-        <contents-adm 
+        <contents-adm
             v-if="!this.loading && this.statusView == 'auth'"
         />
     </v-app>
@@ -22,7 +22,7 @@ import {mapGetters} from 'vuex'
 import Auth from './views/Auth.vue'
 import Loading from './components/shared/Loading.vue'
 
-import ContentsAdm from './views/Dashboard/Contents.vue'
+import ContentsAdm from './views/Dashboard/contentHome.vue'
 import ContentsClient from './views/Clients/Contents.vue'
 import authValidate from './config/mixins/authValidate'
 
@@ -39,8 +39,9 @@ export default {
         Auth,
         Loading,
         ContentsAdm,
-        ContentsClient, 
+        ContentsClient,
     },
-    mixins:[authValidate]
+    mixins:[authValidate],
+
 }
 </script>
