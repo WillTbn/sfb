@@ -57,6 +57,9 @@ apps.config.globalProperties.$filters = {
     },
     notificationsSelect(value){
         return value == "A" ? true : false
+    },
+    firstName(value){
+        return value.charAt(0).toUpperCase()+ value.substr(1)
     }
 }
 

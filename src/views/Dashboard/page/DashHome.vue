@@ -16,7 +16,7 @@
 </template>
 <script>
 import MoveLogin from '../../../components/Dashboad/Charts/MoveLogin.vue';
-import VariableData from '../../../components/Dashboad/VariableData.vue';
+import VariableData from '../../../components/Dashboad/Data/VariableData.vue';
 export default{
     name:"DashHome",
     components:{

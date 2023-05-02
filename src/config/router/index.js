@@ -3,6 +3,7 @@ import Auth from '../../views/Auth.vue'
 import HomeView from '../../views/HomeView.vue'
 import CheckoutView from '../../views/CheckoutView.vue'
 import DashHome from '../../views/Dashboard/page/DashHome.vue'
+import UsersCentral from '../../views/Dashboard/page/UsersCentral.vue'
 
 const routes = [
     {
@@ -36,6 +37,12 @@ const routes = [
         path: '/DashHome',
         name: 'DashHome',
         component: DashHome,
+        meta: { transition: 'slide-right' },
+    },
+    {
+        path: '/UsersCentral',
+        name: 'UsersCentral',
+        component: UsersCentral,
         meta: { transition: 'slide-right' },
     }
 ]

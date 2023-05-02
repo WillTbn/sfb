@@ -25,9 +25,13 @@
                 <v-divider></v-divider>
 
                 <v-list density="compact" nav>
-                    <v-list-item prepend-icon="mdi-home-city" title="Home" value="home"></v-list-item>
+                    <router-link :to="{path:'/DashHome'}" >
+                        <v-list-item prepend-icon="mdi-home-city" title="Home" value="home"></v-list-item>
+                    </router-link>
+                    <router-link :to="{path:'/UsersCentral'}" >
+                        <v-list-item prepend-icon="mdi-account-group-outline" title="Users" value="users"></v-list-item>
+                    </router-link>
                     <v-list-item prepend-icon="mdi-account" title="My Account" value="account"></v-list-item>
-                    <v-list-item prepend-icon="mdi-account-group-outline" title="Users" value="users"></v-list-item>
                     <v-list-item prepend-icon="mdi-logout" title="Sair" value="logout"  @click="putLogout"></v-list-item>
                 </v-list>
             </v-navigation-drawer>
@@ -63,3 +67,9 @@ export default {
     }
 }
 </script>
+<style>
+.v-list>a{
+    text-decoration: none;
+    color: #000;
+}
+</style>
