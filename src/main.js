@@ -5,6 +5,7 @@ import store from './config/store'
 import vuetify from './config/plugins/vuetify'
 import { loadFonts } from './config/plugins/webfontloader'
 import { library } from '@fortawesome/fontawesome-svg-core'
+import Toaster from '@meforma/vue-toaster';
 import axios from 'axios'
 import {
     faPhone, faCartShopping, faPlus, faTrash, faMinus, faBagShopping,
@@ -60,6 +61,9 @@ apps.config.globalProperties.$filters = {
     },
     firstName(value){
         return value.charAt(0).toUpperCase()+ value.substr(1)
+    },
+    countArray(value){
+        return value.length
     }
 }
 
@@ -68,4 +72,5 @@ apps
     .use(router)
     .use(store)
     .use(vuetify)
-    .mount('#app')
+    .use(Toaster, {position:'top-right'}).provide('toast', apps.config.globalProperties.$toast)
+.mount('#app')

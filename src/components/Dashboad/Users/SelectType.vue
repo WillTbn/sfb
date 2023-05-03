@@ -42,7 +42,7 @@ export default{
         setType(item,id){
             console.log('Aqui esta o tipo selecionado -> ',item)
             this.select = id
-            this.$emit('data-emmit',  this.select)
+            this.$emit('data-type',  this.select)
             console.log('Select', this.select)
         },
         setView(){
@@ -52,7 +52,7 @@ export default{
                 this.view = 'datacontrol'
             }
 
-            this.$emit('status-one',  this.view)
+            this.$emit('status-view',  this.view)
         }
     }
 

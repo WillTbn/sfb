@@ -25,10 +25,13 @@
                 <v-divider></v-divider>
 
                 <v-list density="compact" nav>
-                    <router-link :to="{path:'/DashHome'}" >
-                        <v-list-item prepend-icon="mdi-home-city" title="Home" value="home"></v-list-item>
+                    <router-link :to="{path:'/Dashboard'}" >
+                        <v-list-item prepend-icon="mdi-view-dashboard" title="Home" value="home"></v-list-item>
                     </router-link>
-                    <router-link :to="{path:'/UsersCentral'}" >
+                    <router-link :to="{path:'/Condominios'}" >
+                        <v-list-item prepend-icon="mdi-home-city" title="Condominia" value="condominia"></v-list-item>
+                    </router-link>
+                    <router-link :to="{path:'/Usuarios'}" >
                         <v-list-item prepend-icon="mdi-account-group-outline" title="Users" value="users"></v-list-item>
                     </router-link>
                     <v-list-item prepend-icon="mdi-account" title="My Account" value="account"></v-list-item>
@@ -52,7 +55,7 @@ export default {
         return {
             drawer: true,
             items: [
-                { title: 'Home', icon: 'mdi-home-city' },
+                { title: 'Home', icon: 'mdi-view-dashboard' },
                 { title: 'My Account', icon: 'mdi-account' },
                 { title: 'Users', icon: 'mdi-account-group-outline' },
             ],

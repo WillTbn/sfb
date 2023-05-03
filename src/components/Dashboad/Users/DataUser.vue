@@ -5,71 +5,71 @@
             v-model="valid"
             lazy-validation
         >
-        <v-row>
-            <v-col cols="6" class="text-subtitle-2 font-weight-black mb-1">Nome Completo
-                <v-text-field
-                    v-model="this.data.name"
-                    :rules="[rules.nameRequired, rules.min]"
-                    color="success"
-                    variant="solo"
-                    :disabled="this.loadingForm"
-                ></v-text-field>
-            </v-col>
-            <v-col cols="3" class="text-subtitle-2 font-weight-black mb-1">E-mail
-                <v-text-field
-                    v-model="this.data.email"
+            <v-row>
+                <v-col cols="6" class="text-subtitle-2  mb-1">Nome Completo
+                    <v-text-field
+                        v-model="this.data.name"
+                        :rules="[rules.nameRequired, rules.min]"
+                        color="success"
+                        variant="solo"
+                        :disabled="this.loadingForm"
+                    ></v-text-field>
+                </v-col>
+                <v-col cols="3" class="text-subtitle-2  mb-1">E-mail
+                    <v-text-field
+                        v-model="this.data.email"
 
-                    :rules="[rules.emailRequired, rules.emailValidated]"
-                    color="success"
-                    variant="solo"
-                    :disabled="this.loadingForm"
-                ></v-text-field>
+                        :rules="[rules.emailRequired, rules.emailValidated]"
+                        color="success"
+                        variant="solo"
+                        :disabled="this.loadingForm"
+                    ></v-text-field>
 
-            </v-col>
-            <v-col cols="3" class="text-subtitle-2 font-weight-black mb-1">CPF
-                <v-text-field
-                    v-model="this.data.person"
-                    :rules="[rules.required, rules.personValidated]"
-                    color="success"
-                    variant="solo"
-                    :disabled="this.loadingForm"
-                ></v-text-field>
-            </v-col>
-            <v-col cols="4" class="text-subtitle-2 font-weight-black mb-1">Data de nascimento
-                <v-text-field
-                    v-model="this.data.birthday"
-                    :rules="[rules.required]"
-                    color="success"
-                    variant="solo"
-                    :disabled="this.loadingForm"
-                ></v-text-field>
+                </v-col>
+                <v-col cols="3" class="text-subtitle-2  mb-1">CPF
+                    <v-text-field
+                        v-model="this.data.person"
+                        :rules="[rules.required, rules.personValidated]"
+                        color="success"
+                        variant="solo"
+                        :disabled="this.loadingForm"
+                    ></v-text-field>
+                </v-col>
+                <v-col cols="4" class="text-subtitle-2  mb-1">Data de nascimento
+                    <v-text-field
+                        v-model="this.data.birthday"
+                        :rules="[rules.required]"
+                        color="success"
+                        variant="solo"
+                        :disabled="this.loadingForm"
+                    ></v-text-field>
 
-            </v-col>
-            <v-col cols="4" class="text-subtitle-2 font-weight-black mb-1">Sexo
-                <v-combobox
-                    v-model="this.data.genre"
-                    :items="this.optionsGenre"
-                    variant="solo"
-                    :rules="[rules.required]"
-                    :disabled="this.loadingForm"
-                ></v-combobox>
+                </v-col>
+                <v-col cols="4" class="text-subtitle-2 mb-1">Sexo
+                    <v-combobox
+                        v-model="this.data.genre"
+                        :items="this.optionsGenre"
+                        variant="solo"
+                        :rules="[rules.required]"
+                        :disabled="this.loadingForm"
+                    ></v-combobox>
 
-            </v-col>
-            <v-col cols="4" class="text-subtitle-2 font-weight-black mb-1">Notificações
-                <v-combobox
-                    v-model="this.data.notifications"
-                    :items="['Aceito', 'Recusado']"
-                    variant="solo"
-                    :rules="[rules.required]"
-                    :disabled="this.loadingForm"
-                ></v-combobox>
+                </v-col>
+                <v-col cols="4" class="text-subtitle-2 mb-1">Notificações
+                    <v-combobox
+                        v-model="this.data.notifications"
+                        :items="['Aceito', 'Recusado']"
+                        variant="solo"
+                        :rules="[rules.required]"
+                        :disabled="this.loadingForm"
+                    ></v-combobox>
 
-            </v-col>
-        </v-row>
+                </v-col>
+            </v-row>
             <v-row class="justify-space-between"  v-if="!this.loadingForm">
                 <v-col cols="2">
                     <v-btn
-                        @click="this.$emit('status-one',  '')"
+                        @click="this.$emit('status-view',  'initial')"
                         color="red"
                         icon="mdi-send"
                         variant="text"
@@ -82,7 +82,6 @@
                     <v-btn
                         @click="sentNewUser"
                         color="green"
-
                         :disabled="this.loadingForm"
                         icon="mdi-send"
                         variant="text"

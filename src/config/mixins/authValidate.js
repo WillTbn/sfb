@@ -40,7 +40,7 @@ export default defineComponent({
                 this.$store.commit('user/setAuth', true)
                 this.validated = true
                 if(loggedUser.type === 'M'){
-                    this.$router.push('DashHome')
+                    this.$router.push('Dashboard')
                 }
                 // document.location.replace(document.location.origin)
 

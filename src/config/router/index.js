@@ -4,6 +4,7 @@ import HomeView from '../../views/HomeView.vue'
 import CheckoutView from '../../views/CheckoutView.vue'
 import DashHome from '../../views/Dashboard/page/DashHome.vue'
 import UsersCentral from '../../views/Dashboard/page/UsersCentral.vue'
+import CondominiaControl from '../../views/Dashboard/page/CondominiaControl.vue'
 
 const routes = [
     {
@@ -34,17 +35,24 @@ const routes = [
         component: () => import(/* webpackChunkName: "about" */ '../../views/AboutView.vue')
     },
     {
-        path: '/DashHome',
-        name: 'DashHome',
+        path: '/Dashboard',
+        name: 'Dashboard',
         component: DashHome,
         meta: { transition: 'slide-right' },
     },
     {
-        path: '/UsersCentral',
-        name: 'UsersCentral',
+        path: '/Usuarios',
+        name: 'Usuarios',
         component: UsersCentral,
         meta: { transition: 'slide-right' },
-    }
+    },
+    {
+        path: '/Condominios',
+        name: 'Condominios',
+        component: CondominiaControl,
+        meta: { transition: 'slide-right' },
+    },
+
 ]
 
 const router = createRouter({
