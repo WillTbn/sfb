@@ -5,6 +5,8 @@ import CheckoutView from '../../views/CheckoutView.vue'
 import DashHome from '../../views/Dashboard/page/DashHome.vue'
 import UsersCentral from '../../views/Dashboard/page/UsersCentral.vue'
 import CondominiaControl from '../../views/Dashboard/page/CondominiaControl.vue'
+import PageaNotFound from '../../views/PageNotFound.vue'
+
 
 const routes = [
     {
@@ -37,7 +39,7 @@ const routes = [
     {
         path: '/Dashboard',
         name: 'Dashboard',
-        component: DashHome,
+        component:  DashHome,
         meta: { transition: 'slide-right' },
     },
     {
@@ -52,6 +54,10 @@ const routes = [
         component: CondominiaControl,
         meta: { transition: 'slide-right' },
     },
+    {
+        path:'/:pathMatch(.*)',
+        component:PageaNotFound
+    }
 
 ]
 

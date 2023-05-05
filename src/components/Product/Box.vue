@@ -1,5 +1,5 @@
 <template>
-    <v-col 
+    <v-col
         cols="12"
         sm="6"
         md="2"
@@ -17,7 +17,7 @@
                     height="250"
                     :src="(this.image.includes('default')) ? this.urlImageDefault : this.urlImageStorage"
                 ></v-img>
-            
+
                 <v-card-title>{{name}}</v-card-title>
                 <v-card-text>
                     <v-row
@@ -32,28 +32,28 @@
                         {{$filters.moneyFilter(value)}}
                     </div>
 
-                    
+
                 </v-card-text>
 
                 <v-divider class="mx-4"></v-divider>
-            
-            <!-- Parte fixa -->   
-                <div 
-                class="contador 
+
+            <!-- Parte fixa -->
+                <div
+                class="contador
                     text-center mx-auto pa-4
                     rounded secondary bordered-purple"
-                
+
                 >
                     <!-- carrinho -->
                     <v-btn
                         class=" fab dark small"
                         color="red-darken-1"
                         v-if="this.addItem && !this.sectionCart" @click="start"
-                    > 
+                    >
                         <font-awesome-icon :icon="['fass', 'cart-shopping']" />
                     </v-btn>
                     <!-- carrinho -->
-                    <v-btn 
+                    <v-btn
                             v-if="!this.addItem && this.sectionCart"
                             class="small clip"
                             color="green-darken-3"
@@ -64,12 +64,12 @@
                         >
                         Você já adicinou {{ $filters.moneyFilter(this.cartValue)}}
                     </v-btn>
-                    <font-awesome-icon 
+                    <font-awesome-icon
                         v-if="!this.addItem && this.sectionCart"
-                    class="icon-right" :icon="['fass', 'check']" 
+                    class="icon-right" :icon="['fass', 'check']"
                     />
                     <div class="suave" v-if="this.addItem && this.sectionCart">
-                        <v-card 
+                        <v-card
                             class="d-flex justify-space-between mb-6 align-center"
                             height="35"
                             transition="slide-x-transition"
@@ -85,7 +85,7 @@
                             </div>
                         </v-card>
                         <div class="d-flex justify-space-between mb-2 align-center">
-                            <v-card 
+                            <v-card
                                 class="mr-2 d-flex justify-space-between align-center"
                                 height="35"
                                 width="115"
@@ -97,13 +97,13 @@
                                     <p> {{this.six}}</p>
                                 </div>
                                 <div  @click="toAdd(this.six,this.value, this.name, this.id)" class="mx-auto">
-                                    <font-awesome-icon 
-                                        color="green" 
-                                        :icon="['fass', 'fa-plus']" 
+                                    <font-awesome-icon
+                                        color="green"
+                                        :icon="['fass', 'fa-plus']"
                                     />
                                 </div>
                             </v-card>
-                            <v-card 
+                            <v-card
                                 class="d-flex justify-space-between align-center"
                                 height="35"
                                 width="115"
@@ -115,15 +115,15 @@
                                     <p> {{this.eleven}}</p>
                                 </div>
                                 <div  @click="toAdd(this.eleven,this.value, this.name, this.id)" class="mx-auto">
-                                    <font-awesome-icon 
-                                        color="green" 
-                                        :icon="['fass', 'fa-plus']" 
+                                    <font-awesome-icon
+                                        color="green"
+                                        :icon="['fass', 'fa-plus']"
                                     />
                                 </div>
                             </v-card>
                         </div>
-                        
-                        <v-btn 
+
+                        <v-btn
                             class="small clip"
                             color="green-darken-3"
                             small
@@ -136,8 +136,8 @@
                         </v-btn>
                         <font-awesome-icon class="icon-right" :icon="['fass', 'cart-shopping']" />
                     </div>
-                   
-                
+
+
                 </div>
             </v-card>
         </v-hover>
@@ -167,7 +167,6 @@
 }
 </style>
 <script>
-import { computed } from 'vue'
 import productMix from '../../config/mixins/productMix'
 export default {
     name:'Box',

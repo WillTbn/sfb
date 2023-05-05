@@ -25,14 +25,17 @@
                 <v-divider></v-divider>
 
                 <v-list density="compact" nav>
-                    <router-link :to="{path:'/Dashboard'}" >
-                        <v-list-item prepend-icon="mdi-view-dashboard" title="Home" value="home"></v-list-item>
-                    </router-link>
-                    <router-link :to="{path:'/Condominios'}" >
-                        <v-list-item prepend-icon="mdi-home-city" title="Condominia" value="condominia"></v-list-item>
-                    </router-link>
-                    <router-link :to="{path:'/Usuarios'}" >
-                        <v-list-item prepend-icon="mdi-account-group-outline" title="Users" value="users"></v-list-item>
+                    <router-link
+                        v-for="route in items"
+                        :key="route.id" :to="route.path"
+                    >
+                        <v-list-item
+
+                            :prepend-icon="route.icon"
+                            :title="route.title"
+                            :value="route.title"
+                            >
+                        </v-list-item>
                     </router-link>
                     <v-list-item prepend-icon="mdi-account" title="My Account" value="account"></v-list-item>
                     <v-list-item prepend-icon="mdi-logout" title="Sair" value="logout"  @click="putLogout"></v-list-item>
@@ -55,9 +58,9 @@ export default {
         return {
             drawer: true,
             items: [
-                { title: 'Home', icon: 'mdi-view-dashboard' },
-                { title: 'My Account', icon: 'mdi-account' },
-                { title: 'Users', icon: 'mdi-account-group-outline' },
+                { id:1, title: 'Home', icon: 'mdi-view-dashboard', path:'/Dashboard' },
+                { id:2, title: 'Condominios', icon: 'mdi-home-city', path:'/Condominios'  },
+                { id:3, title: 'Usuários', icon: 'mdi-account-group-outline', path:'/Usuarios'  },
             ],
             rail: true,
         }
@@ -72,7 +75,7 @@ export default {
 </script>
 <style>
 .v-list>a{
-    text-decoration: none;
-    color: #000;
+    text-decoration: none !important;
+    color: #000 !important;
 }
 </style>

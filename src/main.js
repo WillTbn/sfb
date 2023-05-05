@@ -64,6 +64,9 @@ apps.config.globalProperties.$filters = {
     },
     countArray(value){
         return value.length
+    },
+    removeCaracter(value){
+        return value.replace(/.?/,'').replace(/.$/,'')
     }
 }
 

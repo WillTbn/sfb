@@ -11,7 +11,10 @@ export default defineComponent({
     computed:{
         ...mapState('view', ['loading', 'login']),
         ...mapState('user', ['account', 'user', 'auth']),
-        ...mapState(['view', 'shopping'])
+        ...mapState(['view', 'shopping']),
+        currentRouteName() {
+            return this.$route.name;
+        }
     },
     methods: {
         async validateToken(){
@@ -33,16 +36,14 @@ export default defineComponent({
                 this.$store.commit('view/setViewLogin', true)
 
                 let loggedUser = resToken.data.response.user
-
                 this.$store.commit('user/setUser', loggedUser )
                 this.$store.dispatch('user/getDataAccount')
                 this.$store.commit('view/setLoading', false)
                 this.$store.commit('user/setAuth', true)
                 this.validated = true
                 if(loggedUser.type === 'M'){
-                    this.$router.push('Dashboard')
+                    this.$router.options.history.location != '/' ? '' : this.$router.push('Dashboard')
                 }
-                // document.location.replace(document.location.origin)
 
             }else{
                 delete axios.defaults.headers.common['Authorization']

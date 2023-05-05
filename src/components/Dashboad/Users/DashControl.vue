@@ -25,6 +25,7 @@
                         <span class="text-h5">Novo Usuário</span>
                     </v-card-title>
                     <v-card-text>
+                        <!--
                         <v-container>
                             <div
                                 class="select-type-user"
@@ -56,7 +57,44 @@
                                 ></data-user>
                             </div>
                         </v-container>
+                        -->
                         <!-- <small>*indicates required field</small> -->
+
+                        <v-container>
+                            <div
+                                class="select-type-user"
+                                v-if="statusView == 'initial'"
+                            >
+                                <select-type
+                                    @data-type="userData.type = $event"
+                                    @status-view="statusView = $event"
+                                ></select-type>
+                            </div>
+
+                            <div
+                                v-if="statusView == 'controlCondominia'"
+                                class=""
+                            >
+                                <condominia-user
+                                    @status-view="statusView = $event.view, userData.apartament_id = $event.data"
+
+                                />
+
+                            </div>
+
+                            <div
+                                v-if="statusView == 'datacontrol'"
+                                class=""
+                            >
+                                <data-user
+                                    :apartment_id=$filters.removeCaracter(userData.apartament_id)
+                                    @status-view="statusView = $event"
+                                    @data-account="userAccount = $event"
+                                ></data-user>
+                            </div>
+                        </v-container>
+
+
                     </v-card-text>
                     <v-card-actions>
                     <v-spacer></v-spacer>
@@ -73,30 +111,15 @@
         </v-row>
     </div>
 </template>
-<script>
+<script setup>
 import SelectType from './SelectType.vue'
 import DataUser from './DataUser.vue'
 import CondominiaUser from './CondominiaUser.vue'
-export default {
-    name:'DashControl',
-    components:{
-        SelectType, DataUser,CondominiaUser
-    },
-    data() {
-        return{
-            dialog:false,
-            statusView: 'initial',
-            UserData:{
-                type:'',
-                apartament_id:''
-            }
-        }
-    },
-    methos:{
-        selectOne(item){
-            console.log('ITEM _>', item)
-            this.UserData.type = item
-        }
-    }
-}
+import { ref } from 'vue'
+
+const dialog = ref(false)
+const statusView = ref('initial')
+const userData = ref({type:'', apartament_id:''})
+const userAccount = ref()
+
 </script>

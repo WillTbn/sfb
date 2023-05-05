@@ -1,5 +1,12 @@
 <template>
     <div class="condominia-control">
+        <v-alert
+            class="alert-v"
+            closable
+            :text=error.value
+            type="error"
+            v-if="error"
+        ></v-alert>
         <v-container class="teste">
 
             <v-row >
@@ -22,8 +29,14 @@
             </v-btn>
 
         </v-container>
-        <v-contanter class="testeTable">
-            <v-table height="300px">
+        <v-container class="testeTable">
+            <loading-input
+                v-if="loading"
+            />
+            <v-table
+                v-else
+                height="300px"
+            >
                 <thead>
                     <tr>
                         <th class="text-left">
@@ -44,47 +57,42 @@
                     </tr>
                 </tbody>
             </v-table>
-        </v-contanter>
+        </v-container>
     </div>
 </template>
 <script setup>
-import { inject } from 'vue'
-
-import axios from 'axios'
-import { ref, onMounted } from 'vue';
-// import {messageApi} from '../../../config/global';
-
-
-const toast = inject('toast')
+import {  inject } from 'vue'
 const  rules = {
     required: value => !!value || 'Obrigatorio.'
 }
 
-const condominios = ref([])
+import axios from 'axios'
+import { ref } from 'vue';
+// useFetch
+import {useFetch} from '../../../config/composables/fetch'
+import LoadingInput from '@/components/shared/LoadingInput.vue';
+
+
+const {data:condominios, error:error, carregando:loading} = useFetch('/condominia')
+
+const toast = inject('toast')
+
+console.log('ideia -> ', condominios.value)
 const name = ref('')
-const buscarCondominio = async()=>{
-    const req = await axios.get('/condominia')
-
-    // messageApi(req)
-    return req.data.response.condominio
-}
-onMounted(async() => {
-    condominios.value = await buscarCondominio()
-
-})
 const adicionarCondominio = async()=>{
 
-    await axios.post('/condominia/created', { 'name': name.value})
-    // await axios.post('/condominia/created', name.value)
-        .then(res=> {
+    await axios.post('/condominia/created', { 'name': name.value}).then(res=> {
             name.value = ''
             toast.show(res.data.message, {type: `${res.data.status}`})
+            // Atualizando as variáveis reativas
+            condominios.value.push(res.data.response.condominio)
         })
-        .catch(error=>
-            toast.show(error.response.data.message, {type: `${error.response.data.status}`})
-        )
-
-    condominios.value = await buscarCondominio()
+        .catch(error=>toast.show(error.request.response.message, {type: `${error.request.response.status}`}))
+        .finally(()=>{
+            // const {data:condominiosAtualizados} = useFetch('/condominia')
+            // condominios.value = condominiosAtualizados
+            // console.log(condominios.value)
+        })
 
 }
 // const adicionarCondominio = () =>{
