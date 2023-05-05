@@ -1,5 +1,6 @@
 <template>
     <div class="data-user">
+        <p class="py-2"><b>Dados pessoais do usuário</b></p>
         <v-form
             ref="form"
             v-model="valid"
@@ -69,23 +70,35 @@
             <v-row class="justify-space-between"  v-if="!loadingForm">
                 <v-col cols="2">
                     <v-btn
+                        color="red"
+                        prepend-icon="mdi-keyboard-backspace"
+                        @click="this.$emit('status-view',  'initial')"
+                    >
+                        <template v-slot:prepend>
+                            <v-icon></v-icon>
+                        </template>
+                        Voltar
+                    </v-btn>
+                    <!-- <v-btn
                         @click="this.$emit('status-view',  'initial')"
                         color="red"
                         icon="mdi-send"
                         variant="text"
                     >
                         Voltar
-                    </v-btn>
+                    </v-btn> -->
                 </v-col>
                 <v-col cols="2">
-
                     <v-btn
-                        @click="sentNewUser"
+
                         color="green"
+                        append-icon="mdi-send"
+                        @click="sentNewUser"
                         :disabled="loadingForm"
-                        icon="mdi-send"
-                        variant="text"
                     >
+                        <template v-slot:append>
+                            <v-icon></v-icon>
+                        </template>
                         Enviar
                     </v-btn>
                 </v-col>
@@ -139,9 +152,9 @@ let loadingForm = ref( false)
 
 let overlay = ()=>{
     loadingForm.value = true
-    let self = this
+
     setTimeout(function(){
-        self.loadingForm = false
+        loadingForm.value = false
     }, 4000)
 }
 

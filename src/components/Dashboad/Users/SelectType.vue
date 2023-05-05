@@ -1,70 +1,76 @@
 <template>
     <div class="user-select-type">
-        <v-row class="text-center align-center">
-            <v-col v-for="item in this.type" :key="item.id" class="ma-2 pa-5 align-center ">
-                <v-sheet border rounded :height="200" :width="200"
-                    class="elevation-8 hover-sel"
-                    :class="{'border-select' : (this.select == item.id) }"
-                    @click="setType(item.value, item.id)"
+        <h3>Selecione o tipo de usuário que você quer adicionar</h3>
+        <v-container>
+            <v-row justify="space-around">
+                <v-col
+                    v-for="item in type"
+                    :key="item.id"
+                    cols="12"
+                    md="4"
+                    class="hover-sel"
+                    :class="{'border-select' : (select == item.id) }"
+                    @click="setType(item.id)"
                 >
-                    <h2>
-                        {{ item.name }}
-                    </h2>
-                    <small>{{item.description}}</small>
-                </v-sheet>
-            </v-col>
-        </v-row>
-        <v-row class="justfy-end">
-            <v-col>
-                <v-btn @click="setView" icon="mdi-arrow-right" variant="text">
+                    <v-sheet
+                        class="pa-7"
+                        color="grey-lighten-3"
+                    >
+
+                        <h2>
+                            {{ item.name }}
+                        </h2>
+                        <small>{{item.description}}</small>
+
+                    </v-sheet>
+                </v-col>
+            </v-row>
+        </v-container>
+
+        <v-row class="justify-end">
+            <v-col col="2" class="p-7">
+                <v-btn
+                    @click="this.$emit(
+                        'status-view',
+                        {
+                            view: select == 0 ? 'controlCondominia' : 'datacontrol',
+                            data: select
+                        }
+                    )"
+                    color="green"
+                >
                     Continuar
+                    <span icon="mdi-arrow-right"> </span>
                 </v-btn>
             </v-col>
         </v-row>
     </div>
 </template>
-<script>
-export default{
-    name:"SelectType",
-    data(){
-        return {
-            value:'',
-            select:'',
-            view: '',
-            type: [
-                { id:0, name: 'Cliente',      value:'C', description: 'Nosso alvo, clientes terá que ser associado a um condominio e apartamento.'},
-                { id:1, name: 'Estoquista',   value:'V', description: 'Terá alguns acessos relacionado a venda na nossa plataforma administradora.'},
-                { id:2, name: 'Administrado', value:'M', description: 'Terá acesso total em nossa plataforma administradora.'},
-            ]
-        }
-    },
-    methods:{
-        setType(item,id){
-            console.log('Aqui esta o tipo selecionado -> ',item)
-            this.select = id
-            this.$emit('data-type',  this.select)
-            console.log('Select', this.select)
-        },
-        setView(){
-            if(this.select == 0){
-                this.view = 'controlCondominia'
-            }else{
-                this.view = 'datacontrol'
-            }
+<script setup>
+import { ref } from "vue";
 
-            this.$emit('status-view',  this.view)
-        }
-    }
+let select = ref()
 
+const type = [
+    { id:0, name: 'Cliente',      value:'C', description: 'Nosso alvo, clientes terá que ser associado a um condominio e apartamento.'},
+    { id:1, name: 'Estoquista',   value:'V', description: 'Terá alguns acessos relacionado as vendas na nossa plataforma administradora.'},
+    { id:2, name: 'Administrado', value:'M', description: 'Terá acesso total em nossa plataforma administradora, cuidado ao cria esse acesso.'},
+]
+
+const setType = ( id)=>{
+    select.value = id
+    console.log('Select',select.value)
 }
 </script>
+
 <style>
 .hover-sel:hover{
-    border: #000 2px solid;
+    border: #000 1px solid;
     cursor:pointer;
 }
 .border-select{
-    border: #442 3px solid !important;
-    background: #000;
+    border: #442 1px solid !important;
+    background: #442;
+    cursor:pointer;
 }
 </style>

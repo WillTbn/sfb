@@ -66,8 +66,7 @@
                                 v-if="statusView == 'initial'"
                             >
                                 <select-type
-                                    @data-type="userData.type = $event"
-                                    @status-view="statusView = $event"
+                                    @status-view="statusView = $event.view, userData.type = $event.data"
                                 ></select-type>
                             </div>
 
@@ -118,7 +117,7 @@ import CondominiaUser from './CondominiaUser.vue'
 import { ref } from 'vue'
 
 const dialog = ref(false)
-const statusView = ref('initial')
+let statusView = ref('initial')
 const userData = ref({type:'', apartament_id:''})
 const userAccount = ref()
 

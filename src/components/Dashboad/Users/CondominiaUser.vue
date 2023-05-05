@@ -1,6 +1,7 @@
 <template>
     <div class="condominia-user">
-
+        <h3></h3>
+        <p><b>Qual condominio ?</b></p>
         <v-row>
             <v-col>
                 <v-combobox
@@ -12,7 +13,6 @@
                 ></v-combobox>
             </v-col>
         </v-row>
-
         <v-row v-if="data.condominia_id != ''">
             <v-col>
                 <v-combobox
@@ -30,7 +30,7 @@
         <v-row class="justify-space-between" >
             <v-col cols="2">
                 <v-btn
-                    @click="this.$emit('status-view',  'initial')"
+                    @click="this.$emit('status-view',  {view:'initial', data:''})"
                     color="red"
 
                 >
