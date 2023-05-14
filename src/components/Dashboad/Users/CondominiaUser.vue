@@ -40,7 +40,7 @@
             <v-col cols="2">
 
                 <v-btn
-                    @click="this.$emit('status-view',  {view : 'datacontrol', data:data.apartment_id.match(/-(.*?)-/g)[0]})"
+                    @click="setData()"
                     color="green"
                     variant="text"
                 >
@@ -73,6 +73,13 @@ import {ref, watch}from 'vue'
     let condominioId = ref([])
     let selectApartments = ref([])
 
+    // eslint-disable-next-line no-undef
+    const emitEvento = defineEmits(['condominia-data', 'status-view'])
+    const setData = async()=>{
+        emitEvento('condominia-data', { condominio:condominioId.value[0].name, apartament:data.value.apartment_id})
+        emitEvento('status-view', {view : 'datacontrol', data:data.value.apartment_id.match(/-(.*?)-/g)[0]} )
+    }
+
     watch(data.value,(n)=>{
 
         condominioId.value = condominia.value.filter(item => item.name == n.condominia_id)
@@ -82,5 +89,7 @@ import {ref, watch}from 'vue'
         });
         console.log('selectApartment', selectApartment.value)
     })
+
+
 
 </script>

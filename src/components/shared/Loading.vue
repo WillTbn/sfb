@@ -1,6 +1,6 @@
 <template>
     <div class="loading d-flex align-center justify-center">
-        <div class="circle"> 
+        <div class="circle">
             <font-awesome-icon color="red" :icon="['fas', 'beer']" />
         </div>
         <div class="circle">
@@ -23,7 +23,7 @@ export default {
 <style>
 .loading {
     animation: spin988 2s linear infinite;
-    
+
     overflow: hidden;
 }
 .loading .circle {
@@ -36,7 +36,7 @@ export default {
 .loading{
     content: attr(data-text);
     position:absolute;
-    top: 0;
+    top: 50%;
     left: 0;
     width: 100%;
     color: #212121;
@@ -44,7 +44,7 @@ export default {
     animation: lod 5s linear ;
     overflow: hidden;
 }
-/* 
+/*
 .loading .circle:nth-child(1) {
     top: 0;
     left: 0;

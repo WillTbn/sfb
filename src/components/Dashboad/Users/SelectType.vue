@@ -9,8 +9,8 @@
                     cols="12"
                     md="4"
                     class="hover-sel"
-                    :class="{'border-select' : (select == item.id) }"
-                    @click="setType(item.id)"
+                    :class="{'border-select' : (select == item.value) }"
+                    @click="setType(item.value)"
                 >
                     <v-sheet
                         class="pa-7"
@@ -33,7 +33,7 @@
                     @click="this.$emit(
                         'status-view',
                         {
-                            view: select == 0 ? 'controlCondominia' : 'datacontrol',
+                            view: select == 'C' ? 'controlCondominia' : 'datacontrol',
                             data: select
                         }
                     )"

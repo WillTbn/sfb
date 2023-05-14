@@ -79,14 +79,6 @@
                         </template>
                         Voltar
                     </v-btn>
-                    <!-- <v-btn
-                        @click="this.$emit('status-view',  'initial')"
-                        color="red"
-                        icon="mdi-send"
-                        variant="text"
-                    >
-                        Voltar
-                    </v-btn> -->
                 </v-col>
                 <v-col cols="2">
                     <v-btn
@@ -112,25 +104,30 @@
 </template>
 <script setup>
 
-import { defineAsyncComponent, ref, defineProps  } from 'vue'
+import { defineAsyncComponent, ref } from 'vue'
 
 const  rules= {
-    required: value => !!value || 'Required.',
-    min: v => v.length >= 8 || 'Min 8 characters',
+    required: value => !!value || 'Obrigatorio.',
+    min: v => v.length >= 8 || 'Minino 8 caracteres',
     nameRequired:  v => !!v || 'Nome completo obrigatório.',
-    emailMatch: () => (`The email and password you entered don't match`),
-    emailRequired: v => !!v || 'E-mail is required',
-    emailValidated: v => /.+@.+/.test(v) || 'E-mail must be valid',
+    emailMatch: () => (`O e-mail e a senha digitados não coincidem`),
+    emailRequired: v => !!v || 'E-mail e obrigatorio',
+    emailValidated: v => /.+@.+/.test(v) || 'E-mail deve ser válido',
     personValidated: v => v.length == 11 || 'Tem que conter 11 números',
 
 }
 const LoadingInput = defineAsyncComponent(() => import('@/components/shared/LoadingInput.vue'))
+
+// `defineProps` is a compiler macro and no longer needs to be imported.
+// eslint-disable-next-line no-undef
 const props = defineProps({
     apartment_id:{
         type:String,
         required: true
     }
 })
+
+
 
 let data = ref({
     name:'Sujeito Qualquer da Silva',
@@ -157,37 +154,13 @@ let overlay = ()=>{
         loadingForm.value = false
     }, 4000)
 }
-
+// `defineProps` is a compiler macro and no longer needs to be imported.
+// eslint-disable-next-line no-undef
+const emitEvento = defineEmits(['data-account', 'status-view'])
 const sentNewUser = async()=>{
     overlay()
-    return console.log('data -> ',data.value)
-    // this.overlay()
-//             this.$refs.form.validate()
-//             if(this.valid ){
-//                 // const user = {
-//                 //     nome: this.name,
-//                 //     email: this.email,
-//                 //     password : this.password
-//                 // }
-//                 this.text = ''
-//                 this.$emit('data-account', this.data)
-//                 console.log('UserData ->', this.data)
-//                 // axios.post('/auth/login', user)
-//                 // .then(json=>{
-//                 //     this.$store.commit('user/setUser', json.data.response.user)
-//                 //     // context.commit('setToken', json.data.authorisation.token)
-//                 //     console.log(json)
-
-//                 //     localStorage.setItem(localId+'token', JSON.stringify(json.data.response.authorization.token))
-//                 //     this.$router.push({ name: 'Home'})
-//                 // })
-//                 // .catch(e=>{
-//                 //     console.log(e)
-//                 //     this.text = e.response.data.message
-//                 // })
-//             }else{
-//                 this.$refs.form.validate()
-//                 this.text = 'Campos devem ser devidamente preenchidos!'
-//             }
+    emitEvento('data-account',data.value)
+    emitEvento('status-view','usardetails')
+    console.log('data -> ',data.value)
 }
 </script>

@@ -46,6 +46,18 @@ router.beforeEach((to, from, next) => {
 })
 
 apps.config.globalProperties.$filters = {
+    typeUser(value){
+
+
+        let type = [
+            { id:0, value:'cliente', codigo: 'C'},
+            { id:1, value:'estoquista', codigo: 'N'},
+            { id:2, value:'administrado', codigo: 'M'}
+        ]
+        let getValue = type.filter(e=>e.codigo == value)
+
+        return getValue[0].value
+    },
     moneyFilter(value){
         return `R$ ${parseFloat(value).toFixed(2)}`.replace('.', ',')
     },
