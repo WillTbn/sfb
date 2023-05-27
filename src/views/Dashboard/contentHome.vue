@@ -61,6 +61,7 @@ export default {
                 { id:1, title: 'Home', icon: 'mdi-view-dashboard', path:'/Dashboard' },
                 { id:2, title: 'Condominios', icon: 'mdi-home-city', path:'/Condominios'  },
                 { id:3, title: 'Usuários', icon: 'mdi-account-group-outline', path:'/Usuarios'  },
+                { id:3, title: 'Produtos', icon: 'mdi-store-plus', path:'/produtos'  },
             ],
             rail: true,
         }

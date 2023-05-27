@@ -1,10 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Auth from '../../views/Auth.vue'
+import AuthView from '../../views/AuthView.vue'
 import HomeView from '../../views/HomeView.vue'
 import CheckoutView from '../../views/CheckoutView.vue'
 import DashHome from '../../views/Dashboard/page/DashHome.vue'
 import UsersCentral from '../../views/Dashboard/page/UsersCentral.vue'
 import CondominiaControl from '../../views/Dashboard/page/CondominiaControl.vue'
+import ProductControl from '../../views/Dashboard/page/ProductControl.vue'
 import PageaNotFound from '../../views/PageNotFound.vue'
 
 
@@ -12,7 +13,8 @@ const routes = [
     {
         path: '/login',
         name: 'Login',
-        component: Auth,
+        component: AuthView,
+        props:true,
         meta: { transition: 'slide-right' },
     },
     {
@@ -52,6 +54,12 @@ const routes = [
         path: '/Condominios',
         name: 'Condominios',
         component: CondominiaControl,
+        meta: { transition: 'slide-right' },
+    },
+    {
+        path: '/Produtos',
+        name: 'Produtos',
+        component: ProductControl,
         meta: { transition: 'slide-right' },
     },
     {

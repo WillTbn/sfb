@@ -1,5 +1,9 @@
 <template>
     <div class="condominia-control">
+        <header-general
+            page="Condominios"
+
+        />
         <v-alert
             class="alert-v"
             closable
@@ -61,6 +65,8 @@
     </div>
 </template>
 <script setup>
+import HeaderGeneral from '../../../components/Dashboad/shared/HeaderGeneral.vue'
+
 import {  inject } from 'vue'
 const  rules = {
     required: value => !!value || 'Obrigatorio.'

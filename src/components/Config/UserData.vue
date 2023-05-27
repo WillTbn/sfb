@@ -21,11 +21,13 @@
                 </v-card-title>
                 <v-card-text>
                     <v-container>
-                        <avatar-user/>
+                        <avatar-user
+                            :avatar="this.account.avatar"
+                        />
                         <v-row class="d-flex justify-center">
                             <!--
                             <v-col cols="6">
-                                    Aqui vai o avatar!!! 
+                                    Aqui vai o avatar!!!
                                     </v-col>
                                 </v-row>
                                 <v-row>
@@ -48,11 +50,11 @@
                                 class="pa-4"
                             >
                                 <label for="birthay" class="">Data de Nascimento*</label>
-                                <input 
-                                    class="border rounded" 
-                                    type="date" 
+                                <input
+                                    class="border rounded"
+                                    type="date"
                                     name="birthday"
-                                    :value="this.account.birthday" 
+                                    :value="this.account.birthday"
                                     id="birthday"
                                     :rules="birthdayRules"
                                 >
@@ -67,7 +69,7 @@
                                     label="sexo*"
                                     dense
                                     solo
-                                
+
                                     v-model="$filters.genreSelect(this.account.genre)[0]"
                                 ></v-select>
                             </v-col>
@@ -86,7 +88,7 @@
                                 hide-details
                             ></v-checkbox>
                         </v-row>
-                        
+
                         <!-- DISABLED -->
                         <v-row>
                             <!-- <disable-form
@@ -139,7 +141,7 @@
                                     label="CPF"
                                     disabled
                                 ></v-text-field>
-                            </v-col> 
+                            </v-col>
                         </v-row>
                         <!-- DISABLED -->
 
@@ -182,7 +184,7 @@ export default {
         terms: {type:String},
     },
     components:{
-        AvatarUser, 
+        AvatarUser,
         // DisableForm
     },
     data(){
@@ -214,7 +216,7 @@ export default {
             let milisegundos = Date.now() - data.getTime();
             let anos = Math.floor(milisegundos / 31556952000)
             console.log('anos -> ',anos)
-            return anos 
+            return anos
         },
         save(){
             const dataSend = {
@@ -223,6 +225,6 @@ export default {
             console.log('Data send', dataSend)
         }
     }
-    
+
 }
 </script>

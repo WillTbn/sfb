@@ -3,14 +3,14 @@
         <v-col>
             <div class="d-flex">
                 <div class="mt-3">
-                    
-                    <img  v-if="state" :src="$filters.baseUrlPublic(this.account.avatar)" alt="" srcset="" class="rounded" width="100" height="100">
+
+                    <img  v-if="state" :src="$filters.baseUrlPublic(avatar)" alt="" srcset="" class="rounded" width="100" height="100">
                     <img v-else :src="imagePreview" alt="" srcset="" class="rounded" width="100" height="100">
-                    <input type="file" class="d-none" 
-                            id="image" 
-                            accept="image/*" 
-                            ref="avatar" 
-                            name="avatar" 
+                    <input type="file" class="d-none"
+                            id="image"
+                            accept="image/*"
+                            ref="avatar"
+                            name="avatar"
                             @change="getImage($event)"
                           >
                     <a href @click.prevent="openFile()" class="edit-avatar">
@@ -23,7 +23,7 @@
                             L27.473,390.597L0.3,512.69z"/>
                         </svg><br>
                     </a>
-                    <div v-if="selectFile.avatar" class="mt-2"> 
+                    <div v-if="selectFile.avatar" class="mt-2">
                         {{selectFile.avatar.name}}
                         <v-button class="btn badge-light" @click="selectFile.avatar = ''" type="button">
                             <i class="fa fa-trash text-danger"></i>
@@ -39,6 +39,7 @@
 import { mapState } from 'vuex'
 export default {
     name:'AvatarUser',
+    props:['avatar'],
     computed:{...mapState('user',['account'])},
     data() {
         return {
@@ -62,16 +63,16 @@ export default {
             let image = this.$refs.avatar.files[0]
             this.selectFile = image;
             this.form.name = this.selectFile.name
-            
+
             // let reader = new FileReader()
             // reader.readAsDataURL(image);
             console.log(image)
-            
+
             this.imagePreview = URL.createObjectURL(image)
-            
+
             this.state = false
             this.setImage = false
-        
+
         },
         upload(){
             const formData = new FormData();
@@ -79,11 +80,11 @@ export default {
             formData.append('email', 'a define')
 
             formData.append('avatar',  this.$refs.fileInput.files[0])
-    
+
             console.log('UPLOAD')
             // const url = `${baseApiUrl}/${this.user.type}/avatar`
             // const auth = JSON.parse(localStorage.getItem(userKey))
-           
+
         },
         setPresentation(){
             this.inputName = true

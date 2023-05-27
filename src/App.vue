@@ -6,6 +6,8 @@
         /> -->
         <auth
             v-if="!this.loading && this.statusView == 'notAuth'"
+            :token="this.queryToken"
+            :id="this.queryId"
         />
         <!-- Verificar se esta auth false || se ele um tipo cliente  -->
         <contents-client
@@ -19,7 +21,7 @@
 
 <script>
 import {mapGetters} from 'vuex'
-import Auth from './views/Auth.vue'
+import Auth from './views/AuthView.vue'
 import Loading from './components/shared/Loading.vue'
 
 import ContentsAdm from './views/Dashboard/contentHome.vue'

@@ -1,10 +1,8 @@
 <template>
     <v-container fluid class="dash-home">
-        <v-row>
-            <v-col cols="12">
-                <h3>Painel de controle</h3>
-            </v-col>
-        </v-row>
+        <header-general
+            page="Painel de Controle"
+        />
         <variable-data></variable-data>
         <v-row class="justify-center">
             <v-col cols="7" class="rounded mx-2">
@@ -17,11 +15,14 @@
 <script>
 import MoveLogin from '../../../components/Dashboad/Charts/MoveLogin.vue';
 import VariableData from '../../../components/Dashboad/Data/VariableData.vue';
+import HeaderGeneral from '../../../components/Dashboad/shared/HeaderGeneral.vue'
+
 export default{
     name:"DashHome",
     components:{
         VariableData,
-        MoveLogin
+        MoveLogin,
+        HeaderGeneral
     }
 }
 </script>
