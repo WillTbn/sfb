@@ -81,20 +81,6 @@
         </v-container>
         <registration-user
             v-if="status && !loading"
-            :invitation_id="invite.id"
-            :name="invite.name"
-            :email="invite.email"
-            :create_avatar="invite.create_avatar"
-            :apartment_id="dataAuxiliary.apartment_id"
-            :birthday="dataAuxiliary.birthday"
-            :person="dataAuxiliary.person"
-            :genre="dataAuxiliary.genre"
-            :data_apartament="dataAuxiliary.data_apartament"
-            :condominia="dataAuxiliary.condominia"
-            :phone="dataAuxiliary.phone"
-            :telephone="dataAuxiliary.telephone"
-            :notifications="dataAuxiliary.notifications"
-            :type="dataAuxiliary.type"
             @text-view="text = $event"
         >
         </registration-user>
@@ -104,12 +90,13 @@
 <script setup>
 import axios from 'axios'
 import { localId } from '@/config/global'
-import { ref, defineAsyncComponent, onBeforeMount} from 'vue'
-import { useStore } from 'vuex'
+import { ref, defineAsyncComponent, onBeforeMount, computed} from 'vue'
+import {  useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 
 const LoadingInput = defineAsyncComponent(() => import('@/components/shared/LoadingInput.vue'))
 const RegistrationUser = defineAsyncComponent(() => import('@/components/User/RegistrationUser.vue'))
+
 
 // eslint-disable-next-line no-undef
 const props = defineProps({
@@ -133,11 +120,14 @@ const redirectToPage = () =>{
         window.location.replace(origin)
     }, 2000);
 }
+const inviteData = computed(()=> store.state.register.invite)
 
 const getInvite = async() =>{
     try{
         const req = await axios.get(`/invite/${props.token}`)
         console.log(req)
+        store.commit('register/setInvite', req.data.response.invite )
+        // inviteData(req.data.response.invite)
         invite.value = req.data.response.invite
         dataAuxiliary.value = JSON.parse(invite.value.data)
         status.value = true
@@ -148,6 +138,7 @@ const getInvite = async() =>{
         redirectToPage()
     }finally{
         loading.value = false
+        console.log('=>>>>', inviteData.value.name)
     }
 }
 

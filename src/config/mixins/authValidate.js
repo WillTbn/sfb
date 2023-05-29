@@ -49,8 +49,8 @@ export default defineComponent({
                 this.validated = false
                 this.$store.commit('view/setLoading', false)
                 // aqui é um ponto essencial do novo reload ao fazer login
-                if(this.queryToken && this.queryId){
-                    this.$router.push({name: 'Login', query:{token:this.queryToken, id:this.queryId}})
+                if(this.queryToken){
+                    this.$router.push({name: 'Login', query:{token:this.queryToken}})
                 }else{
                     this.$router.push({name: 'Login'})
                 }

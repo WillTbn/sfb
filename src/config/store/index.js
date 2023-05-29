@@ -4,6 +4,7 @@ import products from './modules/products';
 import view from './modules/view';
 import shopping from './modules/shopping'
 import user from './user';
+import register from './register'
 
 export default createStore({
     state: {
@@ -29,5 +30,6 @@ export default createStore({
         products,
         view,
         shopping,
+        register
     }
 })
