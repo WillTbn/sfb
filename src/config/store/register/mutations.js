@@ -4,7 +4,7 @@ export function setUser (state, payload)
 }
 export function setUserId(state, payload)
 {
-    state.user['user_id'] = payload
+    state.account['user_id'] = payload
 }
 export function setAccount(state, payload)
 {
@@ -17,14 +17,23 @@ export function setAccount(state, payload)
     state.account['birthday'] = birthGetter(payload.birthday)
     state.account['notifications'] = payload.notifications != '' ? payload.notifications.charAt(0) :''
     state.account['apartment_id'] = payload.apartment_id
+    // state.account['invitation_id'] = payload.invitation_id
 }
 export function setInvite(state, payload)
 {
     state.invite['name'] = payload.name
     state.invite['email'] = payload.email
     state.invite['invitation_id'] = payload.id
+    state.account['invitation_id'] = payload.id
     state.invite['create_avatar'] = payload.create_avatar
     state.invite['data'] = JSON.parse(payload.data)
+}
+export function setUpdateData(state, payload)
+{
+    state.invite.data['phone'] = payload.phone
+    state.invite.data['telephone'] = payload.telephone
+    state.invite.data['genre'] = payload.genre
+    state.invite.data['notifications'] = payload.notifications
 }
 
 

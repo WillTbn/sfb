@@ -12,7 +12,7 @@
 
         </v-overlay>
         <v-card
-            class="mx-auto bg-success align-center"
+            class="mx-auto align-center"
             width="auto"
             prepend-icon="mdi-account"
         >
@@ -126,20 +126,22 @@ import { useStore } from 'vuex';
 // import { mapState, toRefs } from 'vuex';
 
 // const { account } = toRefs(mapState(['account']));
-
+const statusReq = ref('')
 const store = useStore()
 
 const inviteData = computed(()=> store.state.register.invite)
+// const datainv = computed(()=> store.state.register.account)
 
 const dataAccount = ref({
     name:inviteData.value.name,
     person:inviteData.value.data.person,
+    birthday:inviteData.value.data.birthday,
+    apartment_id:inviteData.value.data.apartment_id,
     telephone:inviteData.value.data.telephone,
     phone:inviteData.value.data.phone,
     genre:inviteData.value.data.genre,
-    birthday:inviteData.value.data.birthday,
     notifications:inviteData.value.data.notifications,
-    apartment_id:inviteData.value.data.apartment_id,
+    invitation_id:inviteData.value.id,
 })
 
 // eslint-disable-next-line no-undef
@@ -169,18 +171,21 @@ const optionsGenre = [
     'Masculino', 'Feminino', 'Outro', 'Não informa'
 ]
 const validateAccount = async() =>{
-
-    emitEvento('status-req', 'Verificando dados!')
+    loadingForm.value = true
+    statusReq.value = 'verificando dados!'
     if(valid.value == true){
         store.commit('register/setAccount', dataAccount.value)
+        store.commit('register/setUpdateData', dataAccount.value)
         setTimeout(function(){
+            statusReq.value = 'dados, ok!'
             loadingForm.value = false
             emitEvento('current-data', props.current_local+1)
          }, 1000)
 
     }else{
+        loadingForm.value = false
         form.value.validate()
-        emitEvento('status-req', 'Erro, verifique os dados')
+        statusReq.value = 'Erro, verifique os dados'
 
     }
 }

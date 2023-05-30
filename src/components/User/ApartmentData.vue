@@ -15,7 +15,7 @@
         </v-overlay>
         <v-col>
             <v-card
-                class="mx-auto bg-secondary align-center"
+                class="mx-auto align-center"
                 width="auto"
                 prepend-icon="mdi-home"
             >
