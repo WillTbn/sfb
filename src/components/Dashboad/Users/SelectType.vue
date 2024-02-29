@@ -27,8 +27,8 @@
             </v-row>
         </v-container>
 
-        <v-row class="justify-end">
-            <v-col col="2" class="p-7">
+        <v-row justify="end">
+            <v-col cols="2" class="p-7">
                 <v-btn
                     @click="this.$emit(
                         'status-view',

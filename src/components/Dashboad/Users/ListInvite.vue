@@ -12,7 +12,7 @@
             v-if="loading"
         />
         <v-table
-            v-else
+            v-if="invites && invites.length > 0"
             height="300px"
         >
             <thead>
@@ -53,7 +53,9 @@
 
             </tbody>
         </v-table>
-
+        <div v-else>
+           <p>Não há nenhuma convite pendente!</p>
+        </div>
     </div>
 </template>
 <script setup>

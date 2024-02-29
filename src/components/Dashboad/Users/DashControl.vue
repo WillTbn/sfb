@@ -5,9 +5,9 @@
             <create-user></create-user>
         </v-row>
         <v-row class="d-flex justify-center align-items-center pa-7">
-           <list-invite
-            style="border:solid 1px #25e25e"
-           ></list-invite>
+            <list-invite
+
+            ></list-invite>
         </v-row>
     </div>
 </template>

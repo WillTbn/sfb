@@ -27,7 +27,7 @@ library.add([
 
 
 axios.defaults.headers.common['accept'] = 'application/json'
-axios.defaults.baseURL = 'http://localhost:8087/api/'
+axios.defaults.baseURL = 'http://localhost:8088/api/'
 
 
 const apps = createApp(App)

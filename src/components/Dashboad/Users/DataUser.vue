@@ -130,12 +130,12 @@ const props = defineProps({
 
 
 let data = ref({
-    name:'Sujeito Qualquer da Silva',
-    email:'j@live.com',
-    person:'12312312333',
-    genre:'Feminino',
-    birthday:'08031990',
-    notifications:'Aceito',
+    name:'',
+    email:'',
+    person:'',
+    genre:'',
+    birthday:'',
+    notifications:'',
     telephone:'',
     phone:'',
     apartment_id:props.apartment_id

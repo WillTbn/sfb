@@ -4,10 +4,12 @@ import HomeView from '../../views/HomeView.vue'
 import CheckoutView from '../../views/CheckoutView.vue'
 import DashHome from '../../views/Dashboard/page/DashHome.vue'
 import UsersCentral from '../../views/Dashboard/page/UsersCentral.vue'
-import CondominiaControl from '../../views/Dashboard/page/CondominiaControl.vue'
+import CondominiaHome from '../../views/Dashboard/page/CondominiaHome.vue'
 import ProductControl from '../../views/Dashboard/page/ProductControl.vue'
 import PageaNotFound from '../../views/PageNotFound.vue'
 
+import CondomniaData from '../../components/Dashboad/Condominia/CondominiaData.vue'
+import CondominiaControl from '../../components/Dashboad/Condominia/CondominiaControl.vue'
 
 const routes = [
     {
@@ -53,8 +55,13 @@ const routes = [
     {
         path: '/Condominios',
         name: 'Condominios',
-        component: CondominiaControl,
+        component: CondominiaHome,
+        props:true,
         meta: { transition: 'slide-right' },
+        children:[
+            {path: '', component:CondominiaControl, name:'Controle condominios', props:true},
+            {path: ':id', component:CondomniaData, name:'Condominio', props:true}
+        ]
     },
     {
         path: '/Produtos',

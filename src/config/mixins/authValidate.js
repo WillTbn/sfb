@@ -58,24 +58,24 @@ export default defineComponent({
                 return
             }
             axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
-            const resToken = await axios.post('/auth/validateToken', token)
-            if(resToken.data.response.user){
-                this.$store.commit('view/setViewLogin', true)
+            // const resToken = await axios.post('/auth/validateToken', token)
+            // if(resToken.data.response.user){
+            //     this.$store.commit('view/setViewLogin', true)
 
-                let loggedUser = resToken.data.response.user
-                this.$store.commit('user/setUser', loggedUser )
-                this.$store.dispatch('user/getDataAccount')
-                this.$store.commit('view/setLoading', false)
-                this.$store.commit('user/setAuth', true)
-                this.validated = true
-                if(loggedUser.type === 'M'){
-                    this.$router.options.history.location != '/' ? '' : this.$router.push('Dashboard')
-                }
+            //     let loggedUser = resToken.data.response.user
+            //     this.$store.commit('user/setUser', loggedUser )
+            //     this.$store.dispatch('user/getDataAccount')
+            //     this.$store.commit('view/setLoading', false)
+            //     this.$store.commit('user/setAuth', true)
+            //     this.validated = true
+            //     if(loggedUser.type === 'M'){
+            //         this.$router.options.history.location != '/' ? '' : this.$router.push('Dashboard')
+            //     }
 
-            }else{
-                delete axios.defaults.headers.common['Authorization']
-                this.validated = true
-            }
+            // }else{
+            //     delete axios.defaults.headers.common['Authorization']
+            //     this.validated = true
+            // }
         }
     },
     created() {

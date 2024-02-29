@@ -1,7 +1,9 @@
 <template>
     <div class="condominia-user">
-        <h3></h3>
         <p><b>Qual condominio ?</b></p>
+        <loading-input
+            v-if="loading"
+        />
         <v-row>
             <v-col>
                 <v-combobox
@@ -9,12 +11,23 @@
                     :items="selectCondominia"
                     variant="solo"
                     :rules="[rules.required]"
-
+                    v-if="!loading"
                 ></v-combobox>
             </v-col>
         </v-row>
         <v-row v-if="data.condominia_id != ''">
             <v-col>
+                <v-combobox
+                    v-model="data.block"
+                    :items="blocks"
+                    item-value="id"
+                    label="Selecione o Bloco"
+                    variant="solo"
+                    :rules="[rules.required]"
+
+                ></v-combobox>
+            </v-col>
+            <v-col v-if="data.block != ''">
                 <v-combobox
                     v-model="data.apartment_id"
                     :items="selectApartments"
@@ -52,6 +65,7 @@
 </template>
 <script setup>
 import { useFetch } from '@/config/composables/fetch'
+import LoadingInput from '@/components/shared/LoadingInput.vue'
 import {ref, watch}from 'vue'
 
     const  rules = {
@@ -61,18 +75,20 @@ import {ref, watch}from 'vue'
     const {
         data:condominia,
         nameCondominias:selectCondominia,
-        apartments:selectApartment
-        // error:error, carregando:loading
+        // apartments:selectApartment,
+        // error:error,
+        carregando:loading
     } = useFetch('/condominia')
 
     const data = ref({
         condominia_id:'',
         apartment_id:'',
+        block:''
     })
 
     let condominioId = ref([])
     let selectApartments = ref([])
-
+    let blocks = ref([])
     // eslint-disable-next-line no-undef
     const emitEvento = defineEmits(['condominia-data', 'status-view'])
     const setData = async()=>{
@@ -81,13 +97,24 @@ import {ref, watch}from 'vue'
     }
 
     watch(data.value,(n)=>{
+        console.log('condominioId -> ',condominioId.value)
 
         condominioId.value = condominia.value.filter(item => item.name == n.condominia_id)
-
-        condominioId.value[0].apartments.forEach(element => {
-            selectApartments.value.push(`-${element.id}- apto. nº ${element.number} - Bloco ${element.block}`)
+        console.log('condominioId ->', condominioId.value)
+        condominioId.value[0].blocks.forEach(e => {
+            blocks.value.push(e.name)
         });
-        console.log('selectApartment', selectApartment.value)
+        if(data.value.block != ''){
+            console.log('condominia.value ->', condominia.value)
+            let valor = condominia.value[0].blocks.filter(item => item.name == n.block)
+            console.log('Valor ->', valor[0])
+            valor[0].apartments.forEach(element => {
+                console.log('element -> ', element)
+                selectApartments.value.push(`-${element.id}- apto. nº ${element.number}`)
+            });
+
+        }
+        // console.log('selectApartment', selectApartment.value)
     })
 
 

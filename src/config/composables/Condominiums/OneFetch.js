@@ -1,26 +1,23 @@
 import { onBeforeMount, ref } from "vue"
 import axios from "axios"
+import { useRoute } from "vue-router"
 export function useFetch(url){
     const data = ref(null)
     const error = ref(null)
     const carregando = ref(true)
-    const nameCondominias = ref([])
     const apartments = ref([])
+    const router = useRoute()
 
     const getCondominios = async()=>{
         try{
-            const req = await axios.get(url)
+            const req = await axios.get(url+router.params.id)
 
             // messageApi(req)
 
-            data.value =  req.data.response.condominio
-            req.data.response.condominio.forEach(element => {
-                nameCondominias.value.push(element.name)
-            });
-            req.data.response.condominio.forEach(element => {
-                apartments.value.push(element.blocks[0].apartments)
-            });
-            console.log('data', data.value)
+            data.value =  req.data.response.condominio[0]
+            apartments.value = req.data.response.condominio[0].apartments
+
+            // console.log('data', data.value)
         }catch(err){
             error.value = "Erro ao obter informações da API."
         }finally{
@@ -29,13 +26,12 @@ export function useFetch(url){
     }
     // console.log('condominios', nameCondominia.value)
     onBeforeMount(async()=>{
-        await getCondominios()
+        await getCondominios(1)
     })
 
     return {
         data,
         error,
-        nameCondominias,
         apartments,
         carregando
     }

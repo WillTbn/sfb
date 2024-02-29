@@ -1,9 +1,5 @@
 <template>
     <div class="condominia-control">
-        <header-general
-            page="Condominios"
-
-        />
         <v-alert
             class="alert-v"
             closable
@@ -64,7 +60,7 @@
                         <td>
                             <v-row>
                                 <v-col cols="auto">
-                                    <v-btn density="default" icon="mdi-open-in-new"></v-btn>
+                                    <v-btn density="default" @click="letsGo(item.id)" icon="mdi-open-in-new"></v-btn>
                                 </v-col>
                                 <v-col cols="auto">
                                     <v-btn density="default" icon="mdi-plus"></v-btn>
@@ -78,18 +74,18 @@
     </div>
 </template>
 <script setup>
+
 import axios from 'axios'
 import { ref } from 'vue';
-// useFetch
+import {useRouter} from 'vue-router'
 import {useFetch} from '../../../config/composables/fetch'
 import LoadingInput from '@/components/shared/LoadingInput.vue';
-import HeaderGeneral from '../../../components/Dashboad/shared/HeaderGeneral.vue'
-
 import {  inject } from 'vue'
+// useFetch
+
 const  rules = {
     required: value => !!value || 'Obrigatorio.'
 }
-
 
 
 const {data:condominios, error:error, carregando:loading} = useFetch('/condominia/getAll')
@@ -97,6 +93,11 @@ const {data:condominios, error:error, carregando:loading} = useFetch('/condomini
 const toast = inject('toast')
 
 console.log('ideia -> ', condominios.value)
+const router = useRouter()
+const letsGo = (id)=>{
+    console.log('Aqui esta o id-> ',id)
+    router.push({path:'/Condominios/'+id, params:{id}})
+}
 const name = ref('')
 const adicionarCondominio = async()=>{
 
@@ -114,13 +115,6 @@ const adicionarCondominio = async()=>{
         })
 
 }
-// const adicionarCondominio = () =>{
-//     const req = axios.post('/condominia/created', name.value)
-//     console.log(req)
-//     toast.show(messageApi(req))
-//     // toast.success(req.data.message)
-//     // condominios.value = buscarCondominio()
-// }
 
 </script>
 <style>
